@@ -5,9 +5,10 @@ const config = {
     user: 'sa',
     password: '123',
     server: 'localhost',
-    database: 'csdl-btl-web',
+    database: 'the-gioi-tuc-cau',
     options: {
-        encrypt: false // Sử dụng kết nối mã hóa
+        encrypt: false, // Sử dụng kết nối mã hóa
+        trustServerCertificate: true
     }
 };
 
