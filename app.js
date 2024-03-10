@@ -1,7 +1,8 @@
 import express from "express";
 import configViewEngine from "./srcs/configs/configEjs.js";
 import bodyParser from "body-parser";
-import { registerUser, loginUser } from "./utils/database.js";
+import { getCartData } from './srcs/models/cart.js';
+import { getUserData } from "./srcs/models/user.js";
 
 const port = 3000;
 const app = express();
@@ -20,35 +21,25 @@ app.get("/", (req, res) => {
 //     res.send("Hello");
 // })
 
-app.post('/register', async (req, res) => {
-    const { username, email, password } = req.body;
+// Quan tasks
+app.get('/checkout', async (req, res) => {
     try {
-        const success = await registerUser(username, email, password);
-        if (success) {
-            res.send('Registration successful');
-        } else {
-            res.status(400).send('Failed to register user');
-        }
+        const cartData = await getCartData();
+        const userData = await getUserData();
+        res.render('checkout', { cartData, userData }); // Truyền dữ liệu vào template engine
     } catch (error) {
-        console.error('Error registering user:', error);
-        res.status(500).send('Internal server error');
+        res.status(500).send('Internal Server Error');
     }
-});
+})
 
-app.post('/login', async (req, res) => {
-    const { email, password } = req.body;
+app.get('/cart', async (req, res) => {
     try {
-        const user = await loginUser(email, password);
-        if (user) {
-            res.send('Login successful');
-        } else {
-            res.status(401).send('Invalid email or password');
-        }
+        const cartData = await getCartData();
+        res.render('cart', { cartData }); // Truyền dữ liệu vào template engine
     } catch (error) {
-        console.error('Error logging in user:', error);
-        res.status(500).send('Internal server error');
+        res.status(500).send('Internal Server Error');
     }
-});
+})
 
 app.listen(port, () => {
     console.log(`Server is running on ${port}`);
