@@ -35,8 +35,8 @@
             <% for(let i = 0; i < 4; i++) { %>
                 <div class="col d-flex align-items-stretch">
                     <div class="card h-100">
-                        <% if(products[i].imageUrl) { %> 
-                            <img src="<%= products[i].imageUrl %>" class="card-img-top" alt="<%= products[i].name %>">
+                        <% if(products[i].url) { %> 
+                            <img src="<%= products[i].url %>" class="card-img-top" alt="<%= products[i].name %>">
                         <% } %>
                         <div class="card-body">
                             <h5 class="card-title"><%= products[i].name %></h5>
@@ -80,7 +80,7 @@
                 <h2 class="text-white">GIÀY CHÍNH HÃNG NIKE</h2>
             </div>
             <div class="col-md-6 mr-5">
-                <a href="/category/sanpham1" class="text-white text-decoration-none float-end">Xem thêm</a>
+                <a href="category/soccer-shoes/nike/all" class="text-white text-decoration-none float-end">Xem thêm</a>
             </div>
         </div>
     </div>
@@ -90,10 +90,10 @@
             <% for(let i = 0; i < products.length; i++) { %>
                 <% if(products[i].category_id === 1 && count1 < 4) { %>
                     <div class="col d-flex align-items-stretch">
-                        <a href="/product/<%= products[i].id %>" class="text-decoration-none">
+                        <a href="category/soccer-shoes/nike/<%= products[i].product_id[0] %>" class="text-decoration-none">
                             <div class="card h-100">
-                                <% if(products[i].imageUrl) { %>
-                                    <img src="<%= products[i].imageUrl %>" class="card-img-top" alt="<%= products[i].name %>">
+                                <% if(products[i].url) { %>
+                                    <img src="<%= products[i].url %>" class="card-img-top" alt="<%= products[i].name %>">
                                 <% } %>
                                 <div class="card-body">
                                     <h5 class="card-title"><%= products[i].name %></h5>
@@ -128,8 +128,8 @@
                     <div class="col d-flex align-items-stretch">
                         <a href="/product/<%= products[i].id %>" class="text-decoration-none">
                             <div class="card h-100">
-                                <% if(products[i].imageUrl) { %>
-                                    <img src="<%= products[i].imageUrl %>" class="card-img-top" alt="<%= products[i].name %>">
+                                <% if(products[i].url) { %>
+                                    <img src="<%= products[i].url %>" class="card-img-top" alt="<%= products[i].name %>">
                                 <% } %>
                                 <div class="card-body">
                                     <h5 class="card-title"><%= products[i].name %></h5>
@@ -163,8 +163,8 @@
                     <div class="col d-flex align-items-stretch">
                         <a href="/product/<%= products[i].id %>" class="text-decoration-none">
                             <div class="card h-100">
-                                <% if(products[i].imageUrl) { %>
-                                    <img src="<%= products[i].imageUrl %>" class="card-img-top" alt="<%= products[i].name %>">
+                                <% if(products[i].url) { %>
+                                    <img src="<%= products[i].url %>" class="card-img-top" alt="<%= products[i].name %>">
                                 <% } %>
                                 <div class="card-body">
                                     <h5 class="card-title"><%= products[i].name %></h5>
@@ -198,8 +198,8 @@
                     <div class="col d-flex align-items-stretch">
                         <a href="/product/<%= products[i].id %>" class="text-decoration-none">
                             <div class="card h-100">
-                                <% if(products[i].imageUrl) { %>
-                                    <img src="<%= products[i].imageUrl %>" class="card-img-top" alt="<%= products[i].name %>">
+                                <% if(products[i].url) { %>
+                                    <img src="<%= products[i].url %>" class="card-img-top" alt="<%= products[i].name %>">
                                 <% } %>
                                 <div class="card-body">
                                     <h5 class="card-title"><%= products[i].name %></h5>
@@ -233,8 +233,8 @@
                     <div class="col d-flex align-items-stretch">
                         <a href="/product/<%= products[i].id %>" class="text-decoration-none">
                             <div class="card h-100">
-                                <% if(products[i].imageUrl) { %>
-                                    <img src="<%= products[i].imageUrl %>" class="card-img-top" alt="<%= products[i].name %>">
+                                <% if(products[i].url) { %>
+                                    <img src="<%= products[i].url %>" class="card-img-top" alt="<%= products[i].name %>">
                                 <% } %>
                                 <div class="card-body">
                                     <h5 class="card-title"><%= products[i].name %></h5>
@@ -268,8 +268,8 @@
                     <div class="col d-flex align-items-stretch">
                         <a href="/product/<%= products[i].id %>" class="text-decoration-none">
                             <div class="card h-100">
-                                <% if(products[i].imageUrl) { %>
-                                    <img src="<%= products[i].imageUrl %>" class="card-img-top" alt="<%= products[i].name %>">
+                                <% if(products[i].url) { %>
+                                    <img src="<%= products[i].url %>" class="card-img-top" alt="<%= products[i].name %>">
                                 <% } %>
                                 <div class="card-body">
                                     <h5 class="card-title"><%= products[i].name %></h5>
@@ -304,8 +304,8 @@
                     <div class="col d-flex align-items-stretch">
                         <a href="/product/<%= products[i].id %>" class="text-decoration-none">
                             <div class="card h-100">
-                                <% if(products[i].imageUrl) { %>
-                                    <img src="<%= products[i].imageUrl %>" class="card-img-top" alt="<%= products[i].name %>">
+                                <% if(products[i].url) { %>
+                                    <img src="<%= products[i].url %>" class="card-img-top" alt="<%= products[i].name %>">
                                 <% } %>
                                 <div class="card-body">
                                     <h5 class="card-title"><%= products[i].name %></h5>
