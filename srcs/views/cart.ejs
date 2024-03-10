@@ -36,6 +36,7 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <% sumbill = 0;%>
                     <% cartData.forEach(item=> { %>
                         <tr id="item<%= item.item_id %>">
                             <th scope="row" class="col-sm-2 col-3 align-middle">
@@ -56,21 +57,24 @@
                             <td class="col-lg-2 col-sm-3 col-4 align-middle text-center">
                                 <div class="btn-group mx-auto" role="group">
                                     <button class="btn btn-link px-2"
-                                        onclick="decQuantity(<%= item.item_id %>)">
+                                        onclick="decQuantity(<%= item.item_id %>, <%= item.product_price%>)">
                                         <i class="fas fa-minus"></i>
                                     </button>
 
-                                    <input id="item<%= item.item_id %>quantity" min="0" max="20" name="quantity" value="<%= item.quantity%>"
-                                        type="number" class="form-control form-control-sm quantity-input" style="width: 50px;" />
+                                    <input id="item<%= item.item_id %>quantity" min="0" max="20" name="quantity"
+                                        value="<%= item.quantity%>" type="number"
+                                        class="form-control form-control-sm quantity-input" style="width: 50px;" />
 
                                     <button class="btn btn-link px-2"
-                                        onclick='incQuantity(<%= item.item_id %>)'>
+                                        onclick='incQuantity(<%= item.item_id %>, <%= item.product_price%>)'>
                                         <i class="fas fa-plus"></i>
                                     </button>
                                 </div>
                             </td>
-                            <td id="item<%= item.item_id %>total" class="col-lg-2 col-3 d-none d-sm-table-cell align-middle">
+                            <td id="item<%= item.item_id %>total"
+                                class="col-lg-2 col-3 d-none d-sm-table-cell align-middle">
                                 <%= (item.product_price*item.quantity).toLocaleString();%>
+                                <% sumbill+=(item.product_price*item.quantity);%>
                             </td>
                             <td class="col-1 d-none d-xl-table-cell align-middle text-center">
                                 <a href="/deleteCartItem?itemId=<%= item.item_id %>" class="btn btn-primary">
@@ -87,7 +91,7 @@
                         <h5>Thành tiền:</h5>
                     </div>
                     <div class="w-100 text-end">
-                        <h5>1.000.000 vnđ</h5>
+                        <h5><span id="totalBill"><%= sumbill.toLocaleString(); %></span> vnđ</h5>
                     </div>
                 </div>
             </div>
@@ -105,12 +109,42 @@
 
             <!-- script -->
             <script>
-                const decQuantity = (itemId)=>{
-                    document.getElementById(`item${itemId}quantity`).stepDown();
-                }
-                const incQuantity = (itemId)=>{
-                    document.getElementById(`item${itemId}quantity`).stepUp();
-                }
+                const decQuantity = (itemId, productPrice) => {
+                    const quantityInput = document.getElementById(`item${itemId}quantity`);
+                    const totalElement = document.getElementById(`item${itemId}total`);
+
+                    if (quantityInput.value > 0) {
+                        quantityInput.stepDown();
+                        updateTotal(quantityInput.value, productPrice, totalElement);
+                        updateTotalBill();
+                    }
+                };
+
+                const incQuantity = (itemId, productPrice) => {
+                    const quantityInput = document.getElementById(`item${itemId}quantity`);
+                    const totalElement = document.getElementById(`item${itemId}total`);
+
+                    quantityInput.stepUp();
+                    updateTotal(quantityInput.value, productPrice, totalElement);
+                    updateTotalBill();
+                };
+
+                const updateTotal = (quantity, productPrice, totalElement) => {
+                    const newTotal = quantity * productPrice;
+                    totalElement.textContent = newTotal.toLocaleString();
+                };
+
+                const updateTotalBill = () => {
+                    const totalBillElement = document.getElementById('totalBill');
+                    const itemTotalElements = document.querySelectorAll('[id^="item"][id$="total"]');
+
+                    let totalBill = 0;
+                    itemTotalElements.forEach((itemTotalElement) => {
+                        totalBill += parseFloat(itemTotalElement.textContent.replace(/\D/g, '')) || 0;
+                    });
+
+                    totalBillElement.textContent = totalBill.toLocaleString();
+                };
             </script>
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
                 integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
