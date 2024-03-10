@@ -1,0 +1,154 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap'); */
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Roboto", sans-serif;
+}
+
+.header2 img {
+    width: 223px;
+    height: 51px;
+}
+
+
+.header2 {
+    background-color: #41bc3f;
+}
+
+.menu > .col-sm-1 > a, .menu > .col-sm-2 > a,.shop2 a, .shop1 a {
+    text-decoration: none;
+    color: white;
+}
+
+.shop1 a, .shop2 a {
+    font-size: 2rem;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+.search a {
+    text-decoration: none;
+    color: black;
+}
+
+.header2 .menu {
+    font-weight: bold;
+}
+
+.menu > .cot > a {
+    color: white;
+    text-decoration: none;
+
+}
+
+.bg-green {
+    background-color: limegreen;
+}
+
+.dropdown-menu .dropdown-item:active {
+    background-color: rgba(216, 184, 184, 0.1)
+}
+
+@media screen and (max-width: 768px) {
+    .menu .text-center {
+        display: none;
+    }
+}
+
+
+.bg-white {
+    background-color: white;
+}
+
+.btn-outline-secondary {
+    border-color: #6c757d;
+  }
+  
+  .btn {
+    margin-right: 5px; /* Tạo khoảng cách giữa các nút */
+  }
+  
+  /* Khi màn hình có kích thước nhỏ hơn 768px, ẩn menu */
+@media (max-width: 768px) {
+    .menu {
+        display: none;
+    }
+
+    .navbar-toggler {
+        display: block;
+    }
+}
+
+@media (min-width: 768px) {
+    .navbar-toggler {
+        display: none;
+    }
+}
+
+
+/* Hiển thị logo theo chiều ngang khi màn hình nhỏ hơn hoặc bằng 768px */
+@media (max-width: 768px) {
+    .logo {
+        display: block;
+        margin: auto;
+        /* max-width: 50%; hoặc số lượng % tùy thuộc vào thiết kế mong muốn */
+    }
+
+    .search {
+        text-align: center;
+        margin-top: auto;
+        
+    }
+    
+    .search .input-group {
+        width: 80%; /* hoặc số lượng % tùy thuộc vào thiết kế mong muốn */
+        margin: auto;
+    }
+
+}
+
+@media (max-width: 992px) {
+    .logo {
+        display: block;
+        margin: auto;
+        /* max-width: 50%; hoặc số lượng % tùy thuộc vào thiết kế mong muốn */
+    }
+    .shop2{
+        display: none;
+    }
+}
+@media (min-width: 993px) {
+    .shop1{
+        display: none;
+    }
+    .offcv{
+        display: none;
+    }
+}
+
+
+.offcanvas {
+    background-color: #f8f9fa; /* Màu nền của Offcanvas */
+}
+
+.offcanvas-header {
+    justify-content: center; /* Canh giữa tiêu đề Offcanvas */
+    background-color: #343a40; /* Màu nền của tiêu đề Offcanvas */
+}
+
+.offcanvas-body {
+    padding: 0; /* Xóa padding mặc định */
+}
+

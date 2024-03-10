@@ -208,3 +208,28 @@ body{
 .container.active .toggle-right{
     transform: translateX(200%);
 }
+
+#alertBox {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffffff;
+    padding: 20px 50px;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    z-index: 9999;
+    text-align: center; /* Để căn giữa nội dung trong ô alert */
+}
+
+#customAlertButton {
+    margin-top: 20px; /* Giảm khoảng cách giữa nút và nội dung */
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #33ba33;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
