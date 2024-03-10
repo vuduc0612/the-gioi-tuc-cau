@@ -5,8 +5,14 @@
 .text1 {
     color: white;
 }
-.header2 {
-    background-color: rgb(14, 171, 14);
+.header2{
+    background-color: limegreen;
+}
+.bg-green{
+    background-color:limegreen;
+}
+.navbar-nav{
+    color: white;
 }
 .header2 img {
     width: 256px;
@@ -21,6 +27,30 @@
     margin-right: 15px;
 }
 
-.navbar {
-    background-color: rgb(14, 171, 14);
+.nav-bar{
+    text-decoration: none;
+    color: black;
+}
+.navbar .nav-link{
+    color: white;
+}
+
+li{
+    font-size: 1.1rem;
+}
+.btn-order {
+    background-color: rgb(99, 156, 99) ;
+    padding: 10px 25px;
+    width: 10rem;
+    height: 3.5rem;
+    border-radius: 5px;
+    border: none;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: aliceblue;
+    
+     /* Tính cả padding và border vào kích thước */
+}
+.btn-order:hover{
+    background-color: forestgreen;
 }
