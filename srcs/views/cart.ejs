@@ -18,7 +18,7 @@
         <div class="container">
             <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item text-primary">Giỏ hàng</li>
+                    <li class="breadcrumb-item text-success">Giỏ hàng</li>
                     <li class="breadcrumb-item">Thanh toán</li>
                     <li class="breadcrumb-item">Hoàn tất</li>
                 </ol>
@@ -56,7 +56,7 @@
                             </td>
                             <td class="col-lg-2 col-sm-3 col-4 align-middle text-center">
                                 <div class="btn-group mx-auto" role="group">
-                                    <button class="btn btn-link px-2"
+                                    <button class="btn btn-link text-success px-2"
                                         onclick="decQuantity(<%= item.item_id %>, <%= item.product_price%>)">
                                         <i class="fas fa-minus"></i>
                                     </button>
@@ -65,12 +65,12 @@
                                         value="<%= item.quantity%>" type="number"
                                         class="form-control form-control-sm quantity-input" style="width: 50px;" />
 
-                                    <button class="btn btn-link px-2"
+                                    <button class="btn btn-link text-success px-2"
                                         onclick='incQuantity(<%= item.item_id %>, <%= item.product_price%>)'>
                                         <i class="fas fa-plus"></i>
                                     </button>
                                 </div><br>
-                                <a href="/deleteCartItem?itemId=<%= item.item_id %>" class="d-xl-none link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Xóa <span><i class="fas fa-trash"></i></span></a>
+                                <a href="/deleteCartItem?itemId=<%= item.item_id %>" class="d-xl-none text-success link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Xóa <span><i class="fas fa-trash"></i></span></a>
                             </td>
                             <td id="item<%= item.item_id %>total"
                                 class="col-lg-2 col-3 d-none d-sm-table-cell align-middle">
@@ -78,7 +78,7 @@
                                 <% sumbill+=(item.product_price*item.quantity);%>
                             </td>
                             <td class="col-1 d-none d-xl-table-cell align-middle text-center">
-                                <a href="/deleteCartItem?itemId=<%= item.item_id %>" class="btn btn-primary">
+                                <a href="/deleteCartItem?itemId=<%= item.item_id %>" class="btn btn-success">
                                     <i class="fas fa-trash"></i>
                                 </a>
                             </td>
@@ -101,7 +101,7 @@
                     <a href="/" class="btn btn-secondary w-100">Tiếp tục mua sắm</a>
                 </div>
                 <div class="col-md-4 col-sm-6 mb-3">
-                    <a href="/checkout" class="btn btn-primary w-100">Tiến hành thanh toán</a>
+                    <a href="/checkout" class="btn btn-success w-100">Tiến hành thanh toán</a>
                 </div>
             </div>
         </div>
