@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="/styles/login.css">
+    <!-- <link rel="stylesheet" href="/css/bootstrap.min.css"> -->
     <title>Đăng nhập</title>
 </head>
 
@@ -34,8 +35,10 @@
                     <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
                 </div>
                 <span>or use your email password</span>
-                <input type="email" name="email"  placeholder="Email">
+
+                <input type="email" name="email" placeholder="Email">
                 <input type="password" name="password" placeholder="Password">
+                <div id="loginError" style="color: red; margin-bottom: 10px;"></div>
                 <a href="#">Quên mật khẩu?</a>
                 <button>Đăng nhập</button>
             </form>
@@ -56,8 +59,15 @@
         </div>
     </div>
 
+    <div id="alertBox">
+        <!-- Nội dung cửa sổ thông báo -->
+        <p id="alertMessage"></p>
+        <!-- Nút để đóng cửa sổ thông báo -->
+        <button id="customAlertButton" onclick="closeAlert()">Đóng</button>
+    </div>
+
     <script src="/scripts/login.js"></script>
+    <!-- <script src="/js/bootstrap.bundle.min.js"></script> -->
 </body>
 
 </html>
-
