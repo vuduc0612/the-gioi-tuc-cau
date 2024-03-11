@@ -22,20 +22,36 @@ app.get("/", (req, res) => {
 // })
 
 // Quan tasks
-app.get('/checkout', async (req, res) => {
+app.get('/cart', async (req, res) => {
     try {
         const cartData = await getCartData();
-        const userData = await getUserData();
-        res.render('checkout', { cartData, userData }); // Truyền dữ liệu vào template engine
+        res.render('cart', { cartData }); // Truyền dữ liệu vào template engine
     } catch (error) {
         res.status(500).send('Internal Server Error');
     }
 })
 
-app.get('/cart', async (req, res) => {
+app.get('/checkout', async (req, res) => {
     try {
         const cartData = await getCartData();
-        res.render('cart', { cartData }); // Truyền dữ liệu vào template engine
+        const userData = await getUserData();
+        res.render('checkout', { cartData, userData });
+    } catch (error) {
+        res.status(500).send('Internal Server Error');
+    }
+})
+
+app.get('/finishCheckout', async (req, res) => {
+    try {
+        res.render('finishCheckout');
+    } catch (error) {
+        res.status(500).send('Internal Server Error');
+    }
+})
+
+app.get('/errorCheckout', async (req, res) => {
+    try {
+        res.render('errorCheckout');
     } catch (error) {
         res.status(500).send('Internal Server Error');
     }
