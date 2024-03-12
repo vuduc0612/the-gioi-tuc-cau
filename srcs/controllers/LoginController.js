@@ -1,49 +1,71 @@
-import pool from "../../utils/database.js";
+import { user } from "../models/user.js";
+import { curUser, status, log } from "../models/user.js";
+import { product } from "../models/product.js";
+import express from "express";
+import bodyParser from 'body-parser';
 
-let log = '';
-let status = '';
-let curUser = '';
+const app = express()
 
-async function registerUser(name, email, password) {
+app.use(bodyParser.urlencoded({ extended: true }));
+
+var curName = '';
+var curStatus = '';
+var logi = '';
+
+async function getHomePage(req, res){
+     curName = curUser;
+     curStatus = status;
+     logi = log;
+    
+    const products = await product.getAllProducts();
+    res.render('home.ejs', { 
+        curName, 
+        curStatus, 
+        logi,
+        products: products,
+    });
+}
+async function register (req, res) {
+    const { username, email, password } = req.body;
     try {
-        const request = pool.request();
-        request.input('username', name);
-        request.input('email', email);
-        request.input('password', password);
-        const result = await request.query('INSERT INTO [user] (username, email, password) VALUES ( @username, @email, @password)');
-        return result.rowsAffected[0] > 0; // Trả về true nếu có bản ghi được thêm vào
+        const success = await user.registerUser(username, email, password);
+        if (success) {
+            res.redirect('/login?successRes=true');
+        } else {
+            res.status(400).send('Failed to register user');
+        }
     } catch (error) {
         console.error('Error registering user:', error);
-        throw error;
+        res.status(500).send('Internal server error');
     }
 }
-
-async function loginUser(email, password) {
+async function login(req, res) {
+    const { email, password } = req.body;
+    //console.log(req.body);
     try {
-        const request = pool.request();
-        request.input('email', email);
-        request.input('password', password);
-
-        const result = await request.query('SELECT * FROM [user] WHERE email = @email AND password = @password');
-
-        if (result.recordset.length > 0) {
-            let user = result.recordset[0];
-            console.log(user);
-            console.log("Email:", user.email);
-            console.log("Password:", user.password);
-            console.log("ID: ", user.user_id);
-            curUser = user.username;
-            status = 'Đăng xuất';
-            log = '/home';
-            return user; // Trả về thông tin người dùng nếu đăng nhập thành công
+        const users = await user.loginUser(email, password);
+        if (users) {
+            // curName = users.username;
+            // curStatus = 'Đăng xuất';
+            // logi = '/home';
+            console.log(curName, curStatus, logi);
+            res.redirect('/login?successLog=true');
         } else {
-            return null; // Trả về null nếu không tìm thấy người dùng
+            res.redirect('/login?error=true');
         }
     } catch (error) {
         console.error('Error logging in user:', error);
-        throw error;
+        res.status(500).send('Internal server error');
     }
 }
-
-export { registerUser, loginUser };
-export { curUser, status, log };
+async function logout(req, res) {
+    // Reset curUser và status về giá trị mặc định
+    curName = '';
+    curStatus = 'Đăng nhập';
+    logi = '/login';
+    const products = await product.getAllProducts();
+    // Redirect người dùng về trang đăng nhập hoặc trang chính, tuỳ thuộc vào yêu cầu
+    res.render('home.ejs', { curName, curStatus, logi, products });
+}
+const LoginController = {getHomePage, register, login, logout};
+export {LoginController};

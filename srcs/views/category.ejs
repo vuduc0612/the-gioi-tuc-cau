@@ -33,11 +33,11 @@
       <div class="row">
         <% if(locals.datas){ %>
           <% datas.forEach((product)=>{%>
-            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 p-2">
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 p-2 image-cus">
               <a href=<%=product.product_id[0] %>><img class="img-fluid" style="min-height: 390px;" src="<%= product.url%>" alt=""></a>
               <div class="name">
                 <a href=<%=product.product_id[0] %>><h6 class="mt-2 mb-0"><%= product.name %></h6></a>
-                <p><%= product.price %> ₫</p>
+                <p><%= product.price.toLocaleString() %> ₫</p>
               </div>
             </div>
             <% }) %>

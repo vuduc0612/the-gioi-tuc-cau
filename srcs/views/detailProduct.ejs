@@ -3,7 +3,7 @@
 
 
     <main id="main">
-        <div class="container container-xxl container-xl container-lg container-md container-fluid px-4 py-2 ">
+        <div class="container container-xxl container-xl container-lg container-md container-fluid px-4 py-0 ">
             <div class="row flex-lg-row g-5 py-5">
                 <div class="col-lg-4 col-xl-5 col-xxl-6">
                     <div id="carouselExample" class="carousel slide">
@@ -81,8 +81,8 @@
                             <input type="hidden" name="size" id="sizeInput" value="">
                             <input type="hidden" name="productId" id="sizeInput" value="<%= products[0].product_id[0] %>">
                         </div>
-                        <br>
-                        <h6>CHỌN SỐ LƯỢNG</h6>
+                        
+                        <h6 class="mt-4">CHỌN SỐ LƯỢNG</h6>
                         <div class="input-group mb-2">
                             <div class="input-group-prepend">
                                 <button class="btn btn-outline-secondary" type="button" id="btnMinus">-</button>
@@ -93,7 +93,7 @@
                                 <button class="btn btn-outline-secondary" type="button" id="btnPlus">+</button>
                             </div>
                         </div>
-                        <div class="my-5">
+                        <div class="mt-5 mb-5">
                             <button type="submit" class="btn-order" id="orderButton" disabled>ĐẶT HÀNG</button>
                         </div>
                     </form>
