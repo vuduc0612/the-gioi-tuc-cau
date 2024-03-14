@@ -276,28 +276,28 @@ INSERT INTO [productImage] VALUES
 (23, N'/products\mizuno\moreliaNeoPro\white-3.webp'),
 (23, N'/products\mizuno\moreliaNeoPro\white-4.webp'),
 -- bong da
-(24, N'/products\ball\nikeAcademy\orange.png'),
+(24, N'/products\ball\nikeAcademy\orange-1.png'),
 
-(25, N'/products\ball\nikeAcademy\green.png'),
+(25, N'/products\ball\nikeAcademy\green-1.png'),
 
-(26, N'/products\ball\nikeFlight\red.webp'),
+(26, N'/products\ball\nikeFlight\red-1.webp'),
 
-(27, N'/products\ball\adidasLeagueBall\blue.webp'),
+(27, N'/products\ball\adidasLeagueBall\blue-1.webp'),
 
-(28, N'/products\ball\adidasTrainningBall\blue.webp'),
+(28, N'/products\ball\adidasTrainningBall\blue-1.webp'),
 
 -- gang tay
-(29, N'/products\glove\nikeGloves\red.png'),
+(29, N'/products\glove\nikeGloves\red-1.png'),
 
-(30, N'/products\glove\nikeGloves\black.png'),
+(30, N'/products\glove\nikeGloves\black-1.png'),
 
-(31, N'/products\glove\nikeGloves\green.png'),
+(31, N'/products\glove\nikeGloves\green-1.png'),
 
-(32, N'/products\glove\adidasPredator\white.webp'),
+(32, N'/products\glove\adidasPredator\white-1.webp'),
 
-(33, N'/products\glove\adidasPredator\black.jpg'),
+(33, N'/products\glove\adidasPredator\black-1.jpg'),
 
-(34, N'/products\glove\adidasPredator\blue.webp'),
+(34, N'/products\glove\adidasPredator\blue-1.webp'),
 
 -- tat chan
 (35, N'/products\sock\adidas\white-1.webp'),
@@ -306,16 +306,16 @@ INSERT INTO [productImage] VALUES
 (36, N'/products\sock\adidas\black-1.webp'),
 (36, N'/products\sock\adidas\black-2.jpeg'),
 
-(37, N'/products\sock\nikeClassic\white.webp'),
+(37, N'/products\sock\nikeClassic\white-1.webp'),
 
-(38, N'/products\sock\nikeClassic\black.webp'),
+(38, N'/products\sock\nikeClassic\black-1.webp'),
 
 -- bang keo
-(39, N'/products\tape\blue.jpg'),
-(39, N'/products\tape\red.jpg'),
-(39, N'/products\tape\orange.jpg'),
-(39, N'/products\tape\black.jpg'),
-(39, N'/products\tape\violet.jpg');
+(39, N'/products\tape\blue-1.jpg'),
+(39, N'/products\tape\red-1.jpg'),
+(39, N'/products\tape\orange-1.jpg'),
+(39, N'/products\tape\black-1.jpg'),
+(39, N'/products\tape\violet-1.jpg');
 
 -- Chen du lieu cho cac san pham giay bong da (category 1->3) co size tu 38-44 voi so luong 30
 INSERT INTO [inventory] (product_id, size, quantity)
