@@ -159,7 +159,7 @@
             document.getElementById("orderForm").addEventListener("submit", function(event) {
                 // Kiểm tra đăng nhập và xử lý form
                 
-                if(locals.userStatus){
+                //if(locals.userStatus){
                     var isLoggedIn = '<%= userStatus %>'; // Hãy đảm bảo bạn đã xác định hàm này
                     console.log(isLoggedIn);
                 
@@ -167,7 +167,7 @@
                         alert("Hãy đăng nhập trước khi đặt hàng!");
                         event.preventDefault(); // Ngăn chặn gửi form
                     }
-                }
+                //}
             });
     
             
