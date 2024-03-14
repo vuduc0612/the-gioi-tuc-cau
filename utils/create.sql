@@ -51,6 +51,7 @@ CREATE TABLE [cart] (
     cart_id INT IDENTITY(1,1) PRIMARY KEY,
     user_id INT,
     total_price DECIMAL(10, 2),
+    cart_status BIT,		
     FOREIGN KEY (user_id) REFERENCES [user](user_id)
 );
 
