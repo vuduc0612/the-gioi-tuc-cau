@@ -1,19 +1,19 @@
 import express from 'express';
-import { LoginController } from '../controllers/LoginController.js';
+import { loginController } from '../controllers/loginController.js';
 import { product } from '../models/product.js';
 
 const router = express.Router();
 
-router.get('/',  LoginController.getHomePage);
+router.get('/',  loginController.getHomePage);
 
 router.get('/login', (req, res) => {
     res.render('login.ejs');
 });
 
-router.post('/register', LoginController.register);
+router.post('/register', loginController.register);
 
-router.post('/login', LoginController.login);
+router.post('/login', loginController.login);
 
-router.post('/logout', LoginController.logout);
+router.post('/', loginController.logout);
 
-export const LoginRoutes = router;
+export const loginRoutes = router;

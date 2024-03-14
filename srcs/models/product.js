@@ -1,10 +1,11 @@
 import pool from "../../utils/database.js";
 
-async function getProductsByCategoryId(id) {
+async function getProductsByCategoryId(categoryId) {
     try {
         const request = pool.request();
-        request.input('id', id);
-        const result = await request.query("select * from product inner join image on product.product_id = image.product_id where product.category_id = @id and image.url like '%first%';");
+        request.input('categoryId', categoryId);
+        const result = await request.query("select * from product inner join productImage on product.product_id = productImage.product_id" +  
+        "\nwhere product.category_id = @categoryId and productImage.url like '%-1%';");
         //console.log(result.recordset)
         return result.recordset;
     } catch (error) {
@@ -17,7 +18,7 @@ async function getProductsById(id) {
         const request = pool.request();
         request.input('id', id);
         const result = await request.query('select *' +
-        '\nfrom product inner join image on product.product_id=image.product_id'+
+        '\nfrom product inner join productImage on product.product_id=productImage.product_id'+
         '\nwhere product.product_id = @id');
         //console.log(result.recordset)
         return result.recordset;
@@ -29,7 +30,8 @@ async function getProductsById(id) {
 async function getAllProducts() { //lấy các sản phẩm nổi bật nhất 
     try {
         const request = pool.request();
-        const result = await request.query("select * from product inner join image on product.product_id = image.product_id where image.url like '%first%';");
+        const result = await request.query("select * from product inner join productImage on product.product_id = productImage.product_id" +  
+        "\nwhere productImage.url like '%-1%';");
         return result.recordset;
     } catch (error) {
         console.error('Failed to get products', error);

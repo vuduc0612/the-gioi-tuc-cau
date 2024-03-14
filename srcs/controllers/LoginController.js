@@ -1,5 +1,5 @@
 import { user } from "../models/user.js";
-import { curUser, status, log } from "../models/user.js";
+import { user_name, user_id, status, cart_id } from "../models/user.js";
 import { product } from "../models/product.js";
 import express from "express";
 import bodyParser from 'body-parser';
@@ -8,20 +8,20 @@ const app = express()
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
-var curName = '';
-var curStatus = '';
-var logi = '';
-
+var userName = '';
+var userStatus = '';
+var userId = 0;
+var cartId = 0;
 async function getHomePage(req, res){
-     curName = curUser;
-     curStatus = status;
-     logi = log;
-    
+    userName = user_name;
+    userStatus = status;
+    userId = user_id;
+    cartId = cart_id;
     const products = await product.getAllProducts();
     res.render('home.ejs', { 
-        curName, 
-        curStatus, 
-        logi,
+        userName, 
+        userStatus, 
+        cartId,
         products: products,
     });
 }
@@ -45,10 +45,9 @@ async function login(req, res) {
     try {
         const users = await user.loginUser(email, password);
         if (users) {
-            // curName = users.username;
-            // curStatus = 'Đăng xuất';
-            // logi = '/home';
-            console.log(curName, curStatus, logi);
+            userId = user_id;
+            cartId = cart_id;
+            //console.log(userName, userStatus);
             res.redirect('/login?successLog=true');
         } else {
             res.redirect('/login?error=true');
@@ -60,12 +59,22 @@ async function login(req, res) {
 }
 async function logout(req, res) {
     // Reset curUser và status về giá trị mặc định
-    curName = '';
-    curStatus = 'Đăng nhập';
-    logi = '/login';
+    userName = '';
+    userId = 0;
+    userStatus = 'Đăng nhập';
+    cartId = 0;
     const products = await product.getAllProducts();
     // Redirect người dùng về trang đăng nhập hoặc trang chính, tuỳ thuộc vào yêu cầu
-    res.render('home.ejs', { curName, curStatus, logi, products });
+    res.render('home.ejs', { userName, userId, userStatus, products });
 }
-const LoginController = {getHomePage, register, login, logout};
-export {LoginController};
+
+function getUser(){
+    return {
+        'userName': userName,
+        'userId': userId,
+        'userStatus': userStatus,
+        'cartId': cartId,
+    }
+}
+const loginController = {getHomePage, register, login, logout, getUser};
+export {loginController};

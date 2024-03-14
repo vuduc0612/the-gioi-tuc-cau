@@ -1,8 +1,11 @@
+
 import pool from "../../utils/database.js";
 
-var log = '';
+
 var status = '';
-var curUser = '';
+var user_name = '';
+var user_id = 0, cart_id = 0;
+var cart_status = 0;
 
 async function registerUser(name, email, password) {
     try {
@@ -10,7 +13,11 @@ async function registerUser(name, email, password) {
         request.input('username', name);
         request.input('email', email);
         request.input('password', password);
-        const result = await request.query('INSERT INTO [user] (username, email, password) VALUES ( @username, @email, @password)');
+        //Thêm người dùng và thêm giỏ giàng cho người dùng.
+        const result = await request.query('INSERT INTO [user] (username, email, password) VALUES ( @username, @email, @password);'+ 
+                                            '\nDECLARE @newUserId INT;' +
+                                            '\nSET @newUserId = SCOPE_IDENTITY();' +
+                                            '\nINSERT INTO cart  VALUES ( @newUserId, 0.00, 0);');
         return result.rowsAffected[0] > 0; // Trả về true nếu có bản ghi được thêm vào
     } catch (error) {
         console.error('Error registering user:', error);
@@ -23,15 +30,19 @@ async function loginUser(email, password) {
         const request = pool.request();
         request.input('email', email);
         request.input('password', password);
-
-        const result = await request.query('SELECT * FROM [user] WHERE email = @email AND password = @password');
-
+        //Lấy user và cart 
+        const result = await request.query('SELECT U.*, cart.cart_id, cart.total_price, cart.cart_status from' +
+                    '\n(SELECT * FROM [user] WHERE email = @email AND password = @password) as u' +
+                    '\nINNER JOIN cart ON U.user_id = cart.user_id WHERE cart.cart_status = 0;');
+        //console.log(result.recordset);
         if (result.recordset.length > 0) {
             let user = result.recordset[0];
-            console.log(user);
-            curUser = user.username;
+            //console.log(user);
+            user_name = user.username;
+            user_id = user.user_id;
+            cart_id = user.cart_id;
+            cart_status = user.cart_status;
             status = 'Đăng xuất';
-            log = '/home';
             return user; // Trả về thông tin người dùng nếu đăng nhập thành công
         } else {
             console.log("Khong co data");
@@ -42,39 +53,40 @@ async function loginUser(email, password) {
         throw error;
     }
 }
-const user = {registerUser, loginUser }
-export {user, curUser, status, log};// user.js
-
-import { connectDatabase, closeDatabase, queryDatabase } from "../../utils/database.js";
-
-const fetchData = async () => {
+async function getUserById(id){
     try {
-        await connectDatabase();
-
-        const user_id = 1;
-        const query = `SELECT [first_name],[last_name],[email],[phone],[address] FROM [user] WHERE [user_id]=${user_id};`;
-
-        // Sử dụng await để đợi Promise trả về
-        const result = await queryDatabase(query);
-
-        return result;
+        const request = pool.request();
+        request.input("id", id);
+        const result = await request.query("SELECT * FROM [user] WHERE [user_id]=@id;");
+        if(result){
+            //console.log(result);
+            return result.recordset[0];
+        }
+        else{
+            return null;
+        }
     } catch (error) {
-        console.error('Error fetching data from database:', error);
-    } finally {
-        await closeDatabase();
+        console.error('Error getting user by id:', error);
+        throw error;
     }
-};
-
-// Gọi hàm để lấy dữ liệu
-const getUserData = async () => {
-    const userData = await fetchData();
-    
-    // Kiểm tra xem cartData có dữ liệu hay không trước khi sử dụng forEach
-    if (userData) {
-        return userData;
-    } else {
-        console.log('No data available');
+}
+async function updateUser(firstName, lastName, address, phoneNumber, userId){
+    try {
+        const request = pool.request();
+        request.input("firstName", firstName);
+        request.input("lastName", lastName);
+        request.input("address", address);
+        request.input("phoneNumber", phoneNumber);
+        request.input("userId", userId);
+        const statement = await request.query(` UPDATE [user]
+            SET first_name = @firstName, last_name = @lastName, address = @address, phone = @phoneNumber
+            WHERE user_id = @userId`);
+        return statement.rowsAffected[0] > 0;
+        
+    } catch (error) {
+        console.error('Error updating user:', error);
+        throw error;
     }
-};
-
-export {getUserData}
+}
+const user = {registerUser, loginUser, getUserById, updateUser };
+export {user, user_name, status, user_id, cart_id, cart_status};

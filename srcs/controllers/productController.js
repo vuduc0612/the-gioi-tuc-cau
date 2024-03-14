@@ -1,43 +1,40 @@
 import { product } from "../models/product.js";
-import { user, curUser, status, log } from "../models/user.js";
+import { loginController } from "./loginController.js";
 
-var curName = '';
-var curStatus = '';
-var logi = '';
+var userName = '';
+var userStatus = '';
 async function getProductsByCategoryId(req, res) {
     try {
-        curName = curUser;
-        curStatus = status;
-        logi = log;
+        userName = loginController.getUser().userName;
+        userStatus = loginController.getUser().userStatus;
         const result = await product.getProductsByCategoryId(1);
         //console.log(result);
         res.render("category.ejs", {
             datas: result,
             title: "Giày Đá Bóng NIKE",
-            curName,
-            curStatus,
-            logi,
+            userName,
+            userStatus,
         });
     } catch (error) {
         res.status(500).send('Internal server error');
+        throw error;
     }
 }
 async function getProductsById(req, res) {
     try {
-        curName = curUser;
-        curStatus = status;
-        logi = log;
+        userName = loginController.getUser().userName;
+        userStatus = loginController.getUser().userStatus;
         const id = parseInt(req.params.id);
         const result = await product.getProductsById(id);
         //console.log(result);
         res.render("detailProduct.ejs", {
             products: result,
-            curName,
-            curStatus,
-            logi,
+            userName,
+            userStatus,
         });
     } catch (error) {
         res.status(500).send('Internal server error');
+        throw error;
     }
 }
 const productController = { getProductsByCategoryId, getProductsById };
