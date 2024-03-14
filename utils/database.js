@@ -1,13 +1,14 @@
+// database.js
+
 import sql from "mssql";
 
-// Cấu hình kết nối đến cơ sở dữ liệu
 const config = {
     user: 'sa',
     password: '12345',
     server: 'localhost',
     database: 'the-gioi-tuc-cau',
     options: {
-        encrypt: false // Sử dụng kết nối mã hóa
+        encrypt: false
     }
 };
 // Tạo pool kết nối

@@ -1,0 +1,26 @@
+<%- include('partials/header'); %>
+
+    <div class="container">
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">Giỏ hàng</li>
+                <li class="breadcrumb-item">Thanh toán</li>
+                <li class="breadcrumb-item text-primary">Hoàn tất</li>
+            </ol>
+        </nav>
+        <div class="card my-5 text-center">
+            <div class="card-header">
+                <h2 class="w-100 text-center text-danger">Đặt hàng thất bại</h2>
+            </div>
+            <div class="card-body">
+                <p class="card-text w-75 mx-auto my-3">Đừng lo lắng, hãy thử đặt hàng lại một lần nữa và đảm bảo
+                    rằng bạn mua hàng đúng quy trình, điền đầy đủ thông tin khi thanh toán. Nếu có bất kỳ thắc mắc
+                    hoặc yêu cầu hỗ trợ nào khác, đừng ngần ngại liên hệ với chúng tôi. Đội ngũ hỗ trợ của chúng tôi
+                    luôn sẵn lòng giúp đỡ.</p>
+                <img src="images/errorCheckoutDecor.png" class="w-25" alt=""><br>
+                <a href="/cart" class="btn btn-success mt-3">Quay lại giỏ hàng</a>
+            </div>
+        </div>
+    </div>
+
+<%- include('partials/footer'); %>

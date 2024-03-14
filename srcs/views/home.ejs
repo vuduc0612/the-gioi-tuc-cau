@@ -1,62 +1,42 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trang chủ</title>
-</head>
-<style>
-    .card {
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
+<%- include('partials/header') %>
 
-    .card:hover {
-        transform: translateY(-8px);
-        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
-    }
+    <img class='img-fluid' src='/images/banner.jpg' alt='banner'>
 
-    .card-img-top {
-        transition: transform 0.3s ease;
-    }
-
-    .card:hover .card-img-top {
-        transform: scale(1.05);
-    }
-</style>
-<body>
-    <%- include('partials/header') %>
-
-    <img class = 'img-thumbnail' src = '/images/banner.jpg' alt = 'banner'>
-
-
-    <h1 class = "text-center font-weight-bold mt-5">Giày bóng đá bán chạy nhất</h1>
+    <h1 class="text-center font-weight-bold mt-5">Giày bóng đá bán chạy nhất</h1>
     <div class="container">
         <div class="row row-cols-1 row-cols-md-4">
-            <% for(let i = 0; i < 4; i++) { %>
+            <% for(let i=0; i < 4; i++) { %>
                 <div class="col d-flex align-items-stretch">
                     <div class="card h-100">
-                        <% if(products[i].url) { %> 
+                        <% if(products[i].url) { %>
                             <img src="<%= products[i].url %>" class="card-img-top" alt="<%= products[i].name %>">
-                        <% } %>
-                        <div class="card-body">
-                            <h5 class="card-title"><%= products[i].name %></h5>
-                            <p class="card-text"><strong><%= products[i].price %>đ</strong></p>
-                        </div>
+                            <% } %>
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <%= products[i].name %>
+                                    </h5>
+                                    <p class="card-text"><strong>
+                                            <%= products[i].price %>đ
+                                        </strong></p>
+                                </div>
                     </div>
                 </div>
-            <% } %>
+                <% } %>
         </div>
     </div>
-    
 
 
-    <div class="container-fluid mt-1" style = "background-color: #F6F6F6; padding: 50px;">
-        <div class = "container">
+
+    <div class="container-fluid mt-1" style="background-color: #F6F6F6; padding: 50px;">
+        <div class="container">
             <div class="row">
-                <div class = "col-md-6">
-                    <h2 class = "text-center font-weight-bold">Về chúng tôi TÚC CẦU SPORT</h2>
-                    <p>Túc Cầu Sport – Giày Đá Bóng, Quần Áo Bóng Đá, Phụ Kiện Chất Lượng. Chúng tôi tự hào là thương hiệu bán lẻ đáng tin cậy, mang đến trải nghiệm mua sắm tốt nhất với dịch vụ chăm sóc khách hàng nhiệt tình và thân thiện.</p>
-                    <p>Với những hiểu biết lâu năm hoạt động trong lĩnh vực bóng đá, cùng đội ngũ chuyên nghiệp bởi vậy bạn hãy hoàn toàn yên tâm khi mua hàng tại Túc Cầu Sport cùng với các chính sách sau:</p>
+                <div class="col-md-6">
+                    <h2 class="text-center font-weight-bold">Về chúng tôi TÚC CẦU SPORT</h2>
+                    <p>Túc Cầu Sport – Giày Đá Bóng, Quần Áo Bóng Đá, Phụ Kiện Chất Lượng. Chúng tôi tự hào là thương
+                        hiệu bán lẻ đáng tin cậy, mang đến trải nghiệm mua sắm tốt nhất với dịch vụ chăm sóc khách hàng
+                        nhiệt tình và thân thiện.</p>
+                    <p>Với những hiểu biết lâu năm hoạt động trong lĩnh vực bóng đá, cùng đội ngũ chuyên nghiệp bởi vậy
+                        bạn hãy hoàn toàn yên tâm khi mua hàng tại Túc Cầu Sport cùng với các chính sách sau:</p>
                     <ul>
                         <li><strong>Miễn phí vận chuyển.</strong></li>
                         <li><strong>Đổi size thoả mái.</strong></li>
@@ -64,15 +44,15 @@
                         <li><strong>Hỗ trợ bảo hành keo đế trọn đời.</strong></li>
                         <li><strong>Tư vấn hỗ trợ 24/24.</strong></li>
                     </ul>
-                    
+
                 </div>
-                <div class = "col-md-6">
-                    <img src="/images/shop.jpg" class = "img-fluid" alt="shop">
+                <div class="col-md-6">
+                    <img src="/images/shop.jpg" class="img-fluid" alt="shop">
                 </div>
             </div>
         </div>
     </div>
-    
+
 
     <div class="container mt-5 rounded-pill p-2" style="background-color: #41BC3F;">
         <div class="row align-items-center">
@@ -86,26 +66,32 @@
     </div>
     <div class="container mt-2">
         <div class="row row-cols-1 row-cols-md-4">
-            <% let count1 = 0; %>
-            <% for(let i = 0; i < products.length; i++) { %>
-                <% if(products[i].category_id === 1 && count1 < 4) { %>
-                    <div class="col d-flex align-items-stretch">
-                        <a href="category/soccer-shoes/nike/<%= products[i].product_id[0] %>" class="text-decoration-none">
-                            <div class="card h-100">
-                                <% if(products[i].url) { %>
-                                    <img src="<%= products[i].url %>" class="card-img-top" alt="<%= products[i].name %>">
-                                <% } %>
-                                <div class="card-body">
-                                    <h5 class="card-title"><%= products[i].name %></h5>
-                                    <p class="card-text"><strong><%= products[i].price %> đ</strong></p>
+            <% let count1=0; %>
+                <% for(let i=0; i < products.length; i++) { %>
+                    <% if(products[i].category_id===1 && count1 < 4) { %>
+                        <div class="col d-flex align-items-stretch">
+                            <a href="category/soccer-shoes/nike/<%= products[i].product_id[0] %>"
+                                class="text-decoration-none">
+                                <div class="card h-100">
+                                    <% if(products[i].url) { %>
+                                        <img src="<%= products[i].url %>" class="card-img-top"
+                                            alt="<%= products[i].name %>">
+                                        <% } %>
+                                            <div class="card-body">
+                                                <h5 class="card-title">
+                                                    <%= products[i].name %>
+                                                </h5>
+                                                <p class="card-text"><strong>
+                                                        <%= products[i].price %> đ
+                                                    </strong></p>
+                                            </div>
                                 </div>
-                            </div>
-                        </a>
-                    </div>
-                    <% count1++; %>
-                <% } %>
-                <% if(count1 >= 4) break; %>
-            <% } %>
+                            </a>
+                        </div>
+                        <% count1++; %>
+                            <% } %>
+                                <% if(count1>= 4) break; %>
+                                    <% } %>
         </div>
     </div>
 
@@ -122,26 +108,31 @@
     </div>
     <div class="container mt-2">
         <div class="row row-cols-1 row-cols-md-4">
-            <% let count2 = 0; %>
-            <% for(let i = 0; i < products.length; i++) { %>
-                <% if(products[i].category_id === 2 && count2 < 4) { %>
-                    <div class="col d-flex align-items-stretch">
-                        <a href="/product/<%= products[i].id %>" class="text-decoration-none">
-                            <div class="card h-100">
-                                <% if(products[i].url) { %>
-                                    <img src="<%= products[i].url %>" class="card-img-top" alt="<%= products[i].name %>">
-                                <% } %>
-                                <div class="card-body">
-                                    <h5 class="card-title"><%= products[i].name %></h5>
-                                    <p class="card-text"><strong><%= products[i].price %> đ</strong></p>
+            <% let count2=0; %>
+                <% for(let i=0; i < products.length; i++) { %>
+                    <% if(products[i].category_id===2 && count2 < 4) { %>
+                        <div class="col d-flex align-items-stretch">
+                            <a href="/product/<%= products[i].id %>" class="text-decoration-none">
+                                <div class="card h-100">
+                                    <% if(products[i].url) { %>
+                                        <img src="<%= products[i].url %>" class="card-img-top"
+                                            alt="<%= products[i].name %>">
+                                        <% } %>
+                                            <div class="card-body">
+                                                <h5 class="card-title">
+                                                    <%= products[i].name %>
+                                                </h5>
+                                                <p class="card-text"><strong>
+                                                        <%= products[i].price %> đ
+                                                    </strong></p>
+                                            </div>
                                 </div>
-                            </div>
-                        </a>
-                    </div>
-                    <% count2++; %>
-                <% } %>
-                <% if(count2 >= 4) break; %>
-            <% } %>
+                            </a>
+                        </div>
+                        <% count2++; %>
+                            <% } %>
+                                <% if(count2>= 4) break; %>
+                                    <% } %>
         </div>
     </div>
 
@@ -157,26 +148,31 @@
     </div>
     <div class="container mt-2">
         <div class="row row-cols-1 row-cols-md-4">
-            <% let count3 = 0; %>
-            <% for(let i = 0; i < products.length; i++) { %>
-                <% if(products[i].category_id === 3 && count3 < 4) { %>
-                    <div class="col d-flex align-items-stretch">
-                        <a href="/product/<%= products[i].id %>" class="text-decoration-none">
-                            <div class="card h-100">
-                                <% if(products[i].url) { %>
-                                    <img src="<%= products[i].url %>" class="card-img-top" alt="<%= products[i].name %>">
-                                <% } %>
-                                <div class="card-body">
-                                    <h5 class="card-title"><%= products[i].name %></h5>
-                                    <p class="card-text"><strong><%= products[i].price %> đ</strong></p>
+            <% let count3=0; %>
+                <% for(let i=0; i < products.length; i++) { %>
+                    <% if(products[i].category_id===3 && count3 < 4) { %>
+                        <div class="col d-flex align-items-stretch">
+                            <a href="/product/<%= products[i].id %>" class="text-decoration-none">
+                                <div class="card h-100">
+                                    <% if(products[i].url) { %>
+                                        <img src="<%= products[i].url %>" class="card-img-top"
+                                            alt="<%= products[i].name %>">
+                                        <% } %>
+                                            <div class="card-body">
+                                                <h5 class="card-title">
+                                                    <%= products[i].name %>
+                                                </h5>
+                                                <p class="card-text"><strong>
+                                                        <%= products[i].price %> đ
+                                                    </strong></p>
+                                            </div>
                                 </div>
-                            </div>
-                        </a>
-                    </div>
-                    <% count3++; %>
-                <% } %>
-                <% if(count3 >= 4) break; %>
-            <% } %>
+                            </a>
+                        </div>
+                        <% count3++; %>
+                            <% } %>
+                                <% if(count3>= 4) break; %>
+                                    <% } %>
         </div>
     </div>
 
@@ -192,26 +188,31 @@
     </div>
     <div class="container mt-2">
         <div class="row row-cols-1 row-cols-md-4">
-            <% let count4 = 0; %>
-            <% for(let i = 0; i < products.length; i++) { %>
-                <% if(products[i].category_id === 4 && count4 < 4) { %>
-                    <div class="col d-flex align-items-stretch">
-                        <a href="/product/<%= products[i].id %>" class="text-decoration-none">
-                            <div class="card h-100">
-                                <% if(products[i].url) { %>
-                                    <img src="<%= products[i].url %>" class="card-img-top" alt="<%= products[i].name %>">
-                                <% } %>
-                                <div class="card-body">
-                                    <h5 class="card-title"><%= products[i].name %></h5>
-                                    <p class="card-text"><strong><%= products[i].price %> đ</strong></p>
+            <% let count4=0; %>
+                <% for(let i=0; i < products.length; i++) { %>
+                    <% if(products[i].category_id===4 && count4 < 4) { %>
+                        <div class="col d-flex align-items-stretch">
+                            <a href="/product/<%= products[i].id %>" class="text-decoration-none">
+                                <div class="card h-100">
+                                    <% if(products[i].url) { %>
+                                        <img src="<%= products[i].url %>" class="card-img-top"
+                                            alt="<%= products[i].name %>">
+                                        <% } %>
+                                            <div class="card-body">
+                                                <h5 class="card-title">
+                                                    <%= products[i].name %>
+                                                </h5>
+                                                <p class="card-text"><strong>
+                                                        <%= products[i].price %> đ
+                                                    </strong></p>
+                                            </div>
                                 </div>
-                            </div>
-                        </a>
-                    </div>
-                    <% count4++; %>
-                <% } %>
-                <% if(count4 >= 4) break; %>
-            <% } %>
+                            </a>
+                        </div>
+                        <% count4++; %>
+                            <% } %>
+                                <% if(count4>= 4) break; %>
+                                    <% } %>
         </div>
     </div>
 
@@ -227,26 +228,31 @@
     </div>
     <div class="container mt-2">
         <div class="row row-cols-1 row-cols-md-4">
-            <% let count5 = 0; %>
-            <% for(let i = 0; i < products.length; i++) { %>
-                <% if(products[i].category_id === 5 && count5 < 4) { %>
-                    <div class="col d-flex align-items-stretch">
-                        <a href="/product/<%= products[i].id %>" class="text-decoration-none">
-                            <div class="card h-100">
-                                <% if(products[i].url) { %>
-                                    <img src="<%= products[i].url %>" class="card-img-top" alt="<%= products[i].name %>">
-                                <% } %>
-                                <div class="card-body">
-                                    <h5 class="card-title"><%= products[i].name %></h5>
-                                    <p class="card-text"><strong><%= products[i].price %> đ</strong></p>
+            <% let count5=0; %>
+                <% for(let i=0; i < products.length; i++) { %>
+                    <% if(products[i].category_id===5 && count5 < 4) { %>
+                        <div class="col d-flex align-items-stretch">
+                            <a href="/product/<%= products[i].id %>" class="text-decoration-none">
+                                <div class="card h-100">
+                                    <% if(products[i].url) { %>
+                                        <img src="<%= products[i].url %>" class="card-img-top"
+                                            alt="<%= products[i].name %>">
+                                        <% } %>
+                                            <div class="card-body">
+                                                <h5 class="card-title">
+                                                    <%= products[i].name %>
+                                                </h5>
+                                                <p class="card-text"><strong>
+                                                        <%= products[i].price %> đ
+                                                    </strong></p>
+                                            </div>
                                 </div>
-                            </div>
-                        </a>
-                    </div>
-                    <% count5++; %>
-                <% } %>
-                <% if(count5 >= 4) break; %>
-            <% } %>
+                            </a>
+                        </div>
+                        <% count5++; %>
+                            <% } %>
+                                <% if(count5>= 4) break; %>
+                                    <% } %>
         </div>
     </div>
 
@@ -262,26 +268,31 @@
     </div>
     <div class="container mt-2">
         <div class="row row-cols-1 row-cols-md-4">
-            <% let count6 = 0; %>
-            <% for(let i = 0; i < products.length; i++) { %>
-                <% if(products[i].category_id === 6 && count6 < 4) { %>
-                    <div class="col d-flex align-items-stretch">
-                        <a href="/product/<%= products[i].id %>" class="text-decoration-none">
-                            <div class="card h-100">
-                                <% if(products[i].url) { %>
-                                    <img src="<%= products[i].url %>" class="card-img-top" alt="<%= products[i].name %>">
-                                <% } %>
-                                <div class="card-body">
-                                    <h5 class="card-title"><%= products[i].name %></h5>
-                                    <p class="card-text"><strong><%= products[i].price %> đ</strong></p>
+            <% let count6=0; %>
+                <% for(let i=0; i < products.length; i++) { %>
+                    <% if(products[i].category_id===6 && count6 < 4) { %>
+                        <div class="col d-flex align-items-stretch">
+                            <a href="/product/<%= products[i].id %>" class="text-decoration-none">
+                                <div class="card h-100">
+                                    <% if(products[i].url) { %>
+                                        <img src="<%= products[i].url %>" class="card-img-top"
+                                            alt="<%= products[i].name %>">
+                                        <% } %>
+                                            <div class="card-body">
+                                                <h5 class="card-title">
+                                                    <%= products[i].name %>
+                                                </h5>
+                                                <p class="card-text"><strong>
+                                                        <%= products[i].price %> đ
+                                                    </strong></p>
+                                            </div>
                                 </div>
-                            </div>
-                        </a>
-                    </div>
-                    <% count6++; %>
-                <% } %>
-                <% if(count6 >= 4) break; %>
-            <% } %>
+                            </a>
+                        </div>
+                        <% count6++; %>
+                            <% } %>
+                                <% if(count6>= 4) break; %>
+                                    <% } %>
         </div>
     </div>
 
@@ -298,32 +309,34 @@
     </div>
     <div class="container mt-2">
         <div class="row row-cols-1 row-cols-md-4">
-            <% let count7 = 0; %>
-            <% for(let i = 0; i < products.length; i++) { %>
-                <% if(products[i].category_id === 7 && count7 < 4) { %>
-                    <div class="col d-flex align-items-stretch">
-                        <a href="/product/<%= products[i].id %>" class="text-decoration-none">
-                            <div class="card h-100">
-                                <% if(products[i].url) { %>
-                                    <img src="<%= products[i].url %>" class="card-img-top" alt="<%= products[i].name %>">
-                                <% } %>
-                                <div class="card-body">
-                                    <h5 class="card-title"><%= products[i].name %></h5>
-                                    <p class="card-text"><strong><%= products[i].price %> đ</strong></p>
+            <% let count7=0; %>
+                <% for(let i=0; i < products.length; i++) { %>
+                    <% if(products[i].category_id===7 && count7 < 4) { %>
+                        <div class="col d-flex align-items-stretch">
+                            <a href="/product/<%= products[i].id %>" class="text-decoration-none">
+                                <div class="card h-100">
+                                    <% if(products[i].url) { %>
+                                        <img src="<%= products[i].url %>" class="card-img-top"
+                                            alt="<%= products[i].name %>">
+                                        <% } %>
+                                            <div class="card-body">
+                                                <h5 class="card-title">
+                                                    <%= products[i].name %>
+                                                </h5>
+                                                <p class="card-text"><strong>
+                                                        <%= products[i].price %> đ
+                                                    </strong></p>
+                                            </div>
                                 </div>
-                            </div>
-                        </a>
-                    </div>
-                    <% count7++; %>
-                <% } %>
-                <% if(count7 >= 4) break; %>
-            <% } %>
+                            </a>
+                        </div>
+                        <% count7++; %>
+                            <% } %>
+                                <% if(count7>= 4) break; %>
+                                    <% } %>
         </div>
     </div>
-    
-    
-    
 
-    <%- include('partials/footer') %>
-</body>
-</html>
+<%- include('partials/footer') %>
+
+    

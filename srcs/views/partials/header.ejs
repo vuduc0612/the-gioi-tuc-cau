@@ -2,102 +2,205 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Shop Giay</title>
-  <!-- <link rel="stylesheet" href="/css/bootstrap.min.css"> -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop Giay</title>
+    <!-- <link rel="stylesheet" href="/css/bootstrap.min.css"> -->
 
-  <link rel="stylesheet" href="/themify-icons/themify-icons.css">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-  <link rel="stylesheet" href="/styles/header.css">
-  <style>
-    a {
-      text-decoration: none;
-      color: black;
-    }
+    <link rel="stylesheet" href="/themify-icons/themify-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="/styles/header.css">
+    <script src="https://kit.fontawesome.com/c05ecbd34f.js" crossorigin="anonymous"></script>
+    <style>
+        a {
+            text-decoration: none;
+            color: black;
+        }
 
-    p, h2 {
-      margin: 0;
-    }
-    
-  </style>
+        p,
+        h2 {
+            margin: 0;
+        }
+
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .image-cus:hover{
+            transform: scale(1.01);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .card-img-top {
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover .card-img-top {
+            transform: scale(1.05);
+        }
+        .form-check-input:checked {
+            background-color: #198754;
+            border-color: #198754;
+        }
+    </style>
 
 </head>
 
 <body>
+    <div class="header2 py-2">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="offcv col-2 col-md-2">
+                    <button class="navbar-toggler my-2 text-start" type="button" data-bs-toggle="offcanvas"
+                        data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+                        <i class="ti-menu" style="font-size: 2rem; color:white;"></i>
+                    </button>
+                </div>
+                <div class="col-xxl-3 col-lg-4 col-md-8 col-8">
+                    <!-- Sử dụng class col-6 để hiển thị 50% chiều rộng của cột khi màn hình nhỏ -->
+                    <img class="logo" src="/images/logo.png" alt="logo">
+                </div>
+                <div class="shop1 col-md-2 col-2 text-end">
+                    <a href="/cart">
+                        <i class="ti-shopping-cart "></i>
+                    </a>
+                </div>
 
-  <div class="header1">
-    <div class="container">
-      <div class="row text1">
-        <div class="col-sm-8 ">
-          GIÀY ĐÁ BÓNG, PHỤ KIỆN CHẤT LƯỢNG
+
+                <div class="search col-xxl-6 col-lg-6 col-md-10 col-12 text-center">
+                    <!-- Sử dụng class col-6 tương tự như trên -->
+                    <div class="input-group mb-2 my-2">
+                        <input type="text" class="form-control" placeholder="Search" aria-label="Search"
+                            aria-describedby="basic-addon2">
+                        <span class="input-group-text fs-6" id="basic-addon2">
+                            <a class="search" href="">
+                                <i class="ti-search "></i>
+                            </a>
+                        </span>
+                    </div>
+                </div>
+                <div class="shop2 col-xxl-3 col-md-2 col-sm-2 text-end">
+                    <a href="/cart">
+                        <i class="ti-shopping-cart-full"></i>
+                    </a>
+                </div>
+
+            </div>
         </div>
-        <div class="col-sm-4 text-end">
-          <i class="ti-cup"></i>
+        <div class="container p-1">
+            <div class="menu row my-2 pb-2 align-items-center" style="font-size: 1.25rem;">
+                <div class="col-xxl-2 col-xl-2 col-sm-2 text-center me-5" style="width: fit-content;"><a href="/">
+                        Trang chủ
+                    </a></div>
+                <div class="col-xxl-1 col-xl-1 col-sm-1 text-center me-5" style="width: fit-content;"><a
+                        href="/category/soccer-shoes/nike/all">
+                        Nike
+                    </a></div>
+                <div class="col-xxl-1 col-xl-1 col-sm-1 text-center me-5" style="width: fit-content;"><a href="/category/soccer-shoes/mizuno/all">
+                        Mizuno
+                    </a></div>
+                <div class="col-xxl-1 col-xl-1 col-sm-1 text-center me-5" style="width: fit-content;"><a href="/category/soccer-shoes/adidas/all">
+                        Adidas
+                    </a></div>
+                <div class="col-xxl-1 col-xl-1 col-sm-1 text-center me-5" style="width: fit-content;"><a href="/category/soccer-shoes/others/all">
+                        <a class="nav-link dropdown-toggle" style="color:white;" href="#" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Phụ kiện
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/category/others/ball/all">Bóng</a></li>
+                            <li><a class="dropdown-item" href="/category/others/glove/all">Găng tay</a></li>
+                            <li><a class="dropdown-item" href="/category/others/sock/all">Tất</a></li>
+                            <li><a class="dropdown-item" href="/category/others/tape/all">Băng keo</a>
+                </div>
+                <div class="col-xxl-2 col-xl-2 col-sm-2 text-center me-5" style="width: fit-content;"><a href="/guidances">
+                        Hướng dẫn
+                    </a></div>
+                <div class="col-xxl-1 col-xl-1 col-sm-2 text-end me-auto" style="width: fit-content;"><a href="/news">
+                        Tin tức
+                    </a></div>
+                <div class="cot col-xxl-2 col-xl-2 col-sm-2 nav-item text-end" style="font-size: 1.5rem; color:white">
+
+                    <% if(locals.userName) { %>
+                        <%= userName %>
+                            <a href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i
+                                    class="ti-user"></i></a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <% if (userStatus==='Đăng nhập' ) { %>
+                                        <a class="dropdown-item dang-nhap" id="dropdown-item" href="/login">
+                                            Đăng nhập
+                                        </a>
+                                        <% } else { %>
+                                            <form action="/" method="POST">
+                                                <button type="submit" class="dropdown-item">Đăng xuất</button>
+                                            </form>
+                                            <% } %>
+                                </li>
+                            </ul>
+                            <% } else { %>
+                                <a href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="ti-user "></i>
+                                </a>
+
+                                <ul class="dropdown-menu">
+                                    <li>
+
+                                        <a class="dropdown-item dang-nhap" id="dropdown-item" href="/login">
+                                            Đăng nhập
+                                        </a>
+                                    </li>
+                                </ul>
+                                <% } %>
+
+                </div>
+
+            </div>
         </div>
-      </div>
     </div>
-  </div>
-  <div class="header2">
-    <div class="container">
-      <div class="d-flex flex-wrap align-items-center justify-content-space justify-content-lg-start">
-        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-          <img src="/images/logotuccau.png" alt="Logo">
-        </ul>
 
-        <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" size="40" placeholder="Search" aria-label="Search">
-          <button class="btn btn-danger" type="submit">Search</button>
-        </form>
 
-      </div>
-    </div>
-  </div>
-  <nav class="navbar navbar-expand-lg bg-green">
-    <div class="container ">
-      <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav fs-5 fw-normal ">
-          <li class="nav-item col-2">
-            <a class="nav-link" aria-current="page" href="/">Trang chủ</a>
-          </li>
-          <li class="nav-item col-2">
-            <a class="nav-link" href="/category/soccer-shoes/nike/all">Nike</a>
-          </li>
-          <li class="nav-item col-2">
-            <a class="nav-link" href="/category/soccer-shoes/mizuno/all">Mizuno</a>
-          </li>
-          <li class="nav-item col-2">
-            <a class="nav-link" href="/category/soccer-shoes/adidas/all">Adidas</a>
-          </li>
-          <li class="nav-item dropdown col-2">
-            <a class="nav-link dropdown-toggle" href="/category/soccer-shoes/others/all" role="button"
-              data-bs-toggle="dropdown" aria-expanded="false">
-              Phụ kiện
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Bóng</a></li>
-              <li><a class="dropdown-item" href="#">Găng tay</a></li>
-              <li><a class="dropdown-item" href="#">Tất</a></li>
-              <li><a class="dropdown-item" href="#">Băng keo</a></li>
+    <div class="offcanvas offcanvas-start" style="max-width: 15rem;" tabindex="-1" id="offcanvasNavbar"
+        aria-labelledby="offcanvasNavbarLabel">
+        <div class="offcanvas-header text-white" style="background-color: limegreen;">
+            <h5 class="offcanvas-title" style="font-size: large; font-weight: 600;" id="offcanvasNavbarLabel">Menu</h5>
+            <button type="button" class="btn-close text-white" style="color: white;" data-bs-dismiss="offcanvas"
+                aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <!-- Nội dung của Offcanvas navbar -->
+            <ul class="navbar-nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link active mx-3" style="font-size: large; font-weight: 600;" aria-current="page"
+                        href="#">Trang chủ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link mx-3" style="font-size: large; font-weight: 600;" href="#">Nike</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link mx-3" style="font-size: large; font-weight: 600;" href="#">Mizuno</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link mx-3" style="font-size: large; font-weight: 600;" href="#">Adidas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link mx-3" style="font-size: large; font-weight: 600;" href="#">Phụ kiện</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link mx-3" style="font-size: large; font-weight: 600;" href="#">Hướng dẫn</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link mx-3" style="font-size: large; font-weight: 600;" href="#">Tin tức</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link mx-3" style="font-size: large; font-weight: 600;" href="#">Tài khoản</i></a>
+                </li>
             </ul>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" href="#"> Hướng dẫn</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#"> Tin tức</a>
-          </li>
-        </ul>
-      </div>
+        </div>
     </div>
-    <div class="inout text-end">
-      <!-- <button type="button" class="btn btn-primary">Login</button>
-            <button type="button" class="btn btn-warning">Sign-up</button> -->
-      <a href="" style="text-decoration: none; color: white">
-        <i class="ti-user"></i>
-      </a>
-    </div>
-    </div>
-  </nav>
