@@ -15,13 +15,14 @@ var userStatus = '';
 var userId = 0;
 var cartId = 0;
 
-async function getCartData(req, res) {
+async function addItem(req, res) {
     try {
+        console.log("Get getCartData:", req.body);
         userName = loginController.getUser().userName;
         userId = loginController.getUser().userId;
         cartId = loginController.getUser().cartId;
         userStatus = status;  
-        console.log(user_id);
+        //console.log(user_id);
 
         const infoOfOder = req.body;
         const productId = parseInt(infoOfOder.productId);
@@ -33,12 +34,7 @@ async function getCartData(req, res) {
         if (check) {
             const cartData = await cart.getCartData(user_id);
             //console.log(cartData);
-            res.render('cart', {
-                items: cartData,
-                userName,
-                userStatus,
-                userId,
-            });
+            res.redirect("/cart");
         }
     } catch (error) {
         res.status(500).send('Internal Server Error');
@@ -47,6 +43,7 @@ async function getCartData(req, res) {
 }
 async function getCart(req, res) {
     try {
+        console.log("Get getCart:", req.body);
         userName = loginController.getUser().userName;
         userId = loginController.getUser().userId;
         cartId = loginController.getUser().cartId;
@@ -69,13 +66,14 @@ async function getCart(req, res) {
 }
 async function getChekOut(req, res){
     try {
+        console.log("Get checkout:", req.body);
         userName = loginController.getUser().userName;
         userId = loginController.getUser().userId;
         cartId = loginController.getUser().cartId;
         userStatus = status;
         const cartData = await cart.getCartData(userId);
         const userData = await user.getUserById(userId);
-        console.log(userData);
+        //console.log(userData);
         res.render('checkout', { cartData, userData, userName, userId, userStatus, cartId });
     } catch (error) {
         res.status(500).send('Internal Server Error');
@@ -107,5 +105,22 @@ async function finishCheckout(req, res){
         throw error;
     }
 }
-const cartController = { getCartData, getCart, getChekOut, finishCheckout };
+async function delteItem(req, res){
+    try {
+        const idItem = parseInt(req.query.itemId);
+        console.log(idItem);
+        const deleteStatement = await item.deleteItem(idItem);
+        if(deleteStatement){
+            res.redirect("/cart");
+        }
+        else{
+            res.send("Can't delete this item!");
+        }
+        
+    } catch (error) {
+        res.status(500).send('Internal Server Error');
+        throw error;
+    }
+}
+const cartController = { addItem, getCart, getChekOut, finishCheckout, delteItem };
 export { cartController };
