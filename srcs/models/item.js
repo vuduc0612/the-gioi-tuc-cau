@@ -37,5 +37,16 @@ async function addItem(productId, quantity, size){
         throw error;
     }
 }
-const item = {addItem};
+async function deleteItem(itemId){
+    try {
+        const request = pool.request();
+        request.input("itemId", itemId);
+        const statement = await request.query("DELETE FROM item WHERE item_id = @itemId");
+        return statement.rowsAffected[0] > 0;
+    } catch (error) {
+        console.error("Error deleting item:", error);
+        throw error;
+    }
+}
+const item = {addItem, deleteItem};
 export {item};
