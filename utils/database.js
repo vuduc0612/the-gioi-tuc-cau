@@ -3,10 +3,10 @@
 import sql from "mssql";
 
 const config = {
-    user: 'sa',
-    password: '12345',
+    user: 'admin',
+    password: '23112003',
     server: 'localhost',
-    database: 'the-gioi-tuc-cau',
+    database: 'tgtc.cj208wi82h20.ap-southeast-1.rds.amazonaws.com',
     options: {
         encrypt: false
     }
