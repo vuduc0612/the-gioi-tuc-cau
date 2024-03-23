@@ -4,12 +4,12 @@
 
 <%- include("partials/header.ejs") %>
 
-    <div class="container">
+    <div class="container my-4">
         <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item text-success">Giỏ hàng</li>
-                <li class="breadcrumb-item">Thanh toán</li>
-                <li class="breadcrumb-item">Hoàn tất</li>
+                <li class="breadcrumb-item text-success fs-4">Giỏ hàng</li>
+                <li class="breadcrumb-item fs-4">Thanh toán</li>
+                <li class="breadcrumb-item fs-4">Hoàn tất</li>
             </ol>
         </nav>
         <h2 class="w-100 text-center mb-5">Giỏ hàng của bạn</h2>
@@ -75,7 +75,7 @@
                                 </button>
                             </td>
                         </tr>
-                        <% }); %>
+                    <% }); %>
                 <%}%> 
                     
             </tbody>
@@ -101,45 +101,13 @@
             </div>
         </div>
     </div>
-
-
-    <div id="confirmDeleteModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <p>Bạn có chắc chắn muốn xóa sản phẩm này không?</p>
-            <div>
-                <button class="btn btn-danger" onclick="deleteItem()">Xóa</button>
-                <button class="btn btn-secondary" onclick="closeModal()">Hủy</button>
-            </div>
-        </div>
+    <div id="alertBox">
+        <p id="alertMessage"></p>
+        <button id="customAlertButton" onclick="closeAlert()"></button>
     </div>
-    
-    <!-- Script JavaScript -->
-    <script>
-        // Hàm hiển thị hộp thoại xác nhận xóa
-        function confirmDelete(itemId) {
-            var modal = document.getElementById('confirmDeleteModal');
-            modal.style.display = 'block';
-        }
-    
-        // Hàm đóng hộp thoại
-        function closeModal() {
-            var modal = document.getElementById('confirmDeleteModal');
-            modal.style.display = 'none';
-        }
-    
-        // Hàm xóa sản phẩm
-        function deleteItem() {
-            // Thực hiện xóa sản phẩm tại đây
-            console.log('Xóa sản phẩm');
-    
-            // Đóng hộp thoại sau khi xóa
-            closeModal();
-        }
-    </script>
-
     <!-- script of cart.ejs-->
 <script>
+
     const decQuantity = (itemId, productPrice) => {
         const quantityInput = document.getElementById(`item${itemId}quantity`);
         const totalElement = document.getElementById(`item${itemId}total`);

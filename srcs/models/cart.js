@@ -3,11 +3,10 @@
 import pool from "../../utils/database.js";
 
 async function getCartData(userId) {
-    try {
-        
-        const request = pool.request();
-        //request.input("@userId", userId)
-        const result = await request.query(`
+  try {
+    const request = pool.request();
+    //request.input("@userId", userId)
+    const result = await request.query(`
             SELECT C.*, pi.url 
             FROM
                 (
@@ -27,45 +26,44 @@ async function getCartData(userId) {
                 ) AS C 
             INNER JOIN productImage AS pi ON C.product_id = pi.product_id
             WHERE pi.url LIKE '%-1%' AND C.user_id = ${userId} AND C.cart_status = 0;
-        `)
-        if (result) {
-            //console.log(result.recordset);
-            return result.recordset;
-        }
-        else {
-            console.log('No data available');
-            return null;
-        }
-
-    } catch (error) {
-        console.error('Error fetching data from database:', error);
+        `);
+    if (result) {
+      //console.log(result.recordset);
+      return result.recordset;
+    } else {
+      console.log("No data available");
+      return null;
     }
-};
-async function updateStatusCart(userId, cartId){
-    try {
-        const request = pool.request();
-        request.input("userId", userId);
-        request.input("cartId", cartId);
-        const updateStatement = await request.query(`UPDATE cart 
-                                                    SET cart_status = 1
-                                                    WHERE cart_id = @cartId and user_id = @userId`);
-        return updateStatement.rowsAffected[0] > 0;
-
-    } catch (error) {
-        console.error("Error update status cart:", error);
-        throw error;
-    }
+  } catch (error) {
+    console.error("Error fetching data from database:", error);
+  }
 }
-async function addCart(userId){
-    try {
-        const request = pool.request();
-        request.input("userId", userId);
-        const addStatement = await request.query(`INSERT INTO cart VALUES(@userId, 0.0, 0)`);
-        return addStatement.rowsAffected[0] > 0;
-    } catch (error) {
-        console.error("Error addinf new cart:", error);
-        throw error;
-    }
+async function updateStatusCart(userId, cartId) {
+  try {
+    const request = pool.request();
+    request.input("userId", userId);
+    request.input("cartId", cartId);
+    const updateStatement = await request.query(`UPDATE cart 
+    SET cart_status = 1
+    WHERE cart_id = @cartId and user_id = @userId`);
+    return updateStatement.rowsAffected[0] > 0;
+  } catch (error) {
+    console.error("Error update status cart:", error);
+    throw error;
+  }
+}
+async function addCart(userId) {
+  try {
+    const request = pool.request();
+    request.input("userId", userId);
+    const addStatement = await request.query(
+      `INSERT INTO cart VALUES(@userId, 0.0, 0)`
+    );
+    return addStatement.rowsAffected[0] > 0;
+  } catch (error) {
+    console.error("Error addinf new cart:", error);
+    throw error;
+  }
 }
 const cart = { getCartData, updateStatusCart, addCart };
 export { cart };
