@@ -4,7 +4,7 @@ const router = express.Router();
 
 router.post('/cart', cartController.getCartData);
 router.get('/cart', cartController.getCart);
-router.get('/checkout', cartController.getChekOut);
+router.get('/checkout', cartController.getCheckout);
 router.post('/finishCheckout', cartController.finishCheckout);
 
 router.get('/errorCheckout', async (req, res) => {
@@ -14,6 +14,6 @@ router.get('/errorCheckout', async (req, res) => {
         res.status(500).send('Internal Server Error');
         throw error;
     }
-})
+});
 
-export const carRoutes = router;
+export const cartRoutes = router;
