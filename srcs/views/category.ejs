@@ -1,50 +1,77 @@
-
-
-
-
 <%- include("partials/header.ejs") %>
-  <div class="container">
-    <div class="row py-4">
-      <div class="col-6 d-plex justify-content-start px-2">
-        <h2 class="">
-          <a href="#main">Trang chủ</a>
-          <span class="divider">/</span>
-          <a href="#main">
-            <%= title %>
-          </a>
-        </h2>
-      </div>
-      <div class="col-3 d-flex align-items-center justify-content-center">
-        <p class="">Hiển thị 1–12 của 24 kết quả </p>
-
-      </div>
-      <div class="col-3 d-flex align-items-center">
-        <select class="form-select form-select-sm">
-          <option selected>Thứ tự mặc định</option>
-          <option value="1">Mới nhất</option>
-          <option value="2">Thứ tự theo giá: thấp đến cao</option>
-          <option value="3">Thứ tự theo giá: cao đến thấp</option>
-        </select>
-      </div>
+<div class="container">
+  <div class="row py-4">
+    <div class="col-6 d-flex justify-content-start px-2">
+      <h2 class="">
+        <a href="#main">Trang chủ</a>
+        <span class="divider">/</span>
+        <a href="#main"><%= title %></a>
+      </h2>
+    </div>
+    <div class="col-3 d-flex align-items-center justify-content-center">
+      <p class="">Hiển thị 1–12 của 24 kết quả </p>
+    </div>
+    <div class="col-3 d-flex align-items-center">
+      <select class="form-select form-select-sm" id="sortOptions">
+        <option value="default" selected>Thứ tự mặc định</option>
+        <option value="newest">Mới nhất</option>
+        <option value="lowToHigh">Thứ tự theo giá: thấp đến cao</option>
+        <option value="highToLow">Thứ tự theo giá: cao đến thấp</option>
+      </select>
     </div>
   </div>
-  <main id="main" class="p-3">
-    <div class="container">
-      <div class="row">
-        <% if(locals.datas){ %>
-          <% datas.forEach((product)=>{%>
-            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 p-2 image-cus">
-              <a href=<%=product.product_id[0] %>><img class="img-fluid" style="min-height: 390px;" src="<%= product.url%>" alt=""></a>
-              <div class="name">
-                <a href=<%=product.product_id[0] %>><h6 class="mt-2 mb-0"><%= product.name %></h6></a>
-                <p><%= product.price.toLocaleString() %> ₫</p>
-              </div>
+</div>
+<main id="main" class="p-3">
+  <div class="container">
+    <div class="row">
+      <% if (datas) { %>
+        <% datas.forEach((product) => { %>
+          <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 p-2 image-cus">
+            <a href=<%= product.product_id[0] %>><img class="img-fluid" style="min-height: 390px;" src="<%= product.url %>" alt=""></a>
+            <div class="name">
+              <a href=<%= product.product_id[0] %>><h6 class="mt-2 mb-0"><%= product.name %></h6></a>
+              <p><%= product.price.toLocaleString() %> ₫</p>
             </div>
-            <% }) %>
-         <% } %>
-
-      </div>
+          </div>
+        <% }); %>
+      <% } %>
     </div>
-  </main>
-
+  </div>
+</main>
 <%- include('partials/footer') %>
+
+<!-- <script>
+  document.getElementById("sortOptions").addEventListener("change", function(event) {
+    event.preventDefault(); // Ngăn chặn hành vi mặc định của form hoặc thẻ select
+
+    var selectedOption = this.value;
+    console.log(selectedOption);
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState == 4 && xhr.status == 200) {
+        // Xử lý dữ liệu sản phẩm đã nhận được từ máy chủ
+        var productList = JSON.parse(xhr.responseText);
+        var productHTML = '';
+        productList.forEach(function(product) {
+          productHTML += `
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 p-2 image-cus">
+              <a href="${product.product_id[0]}"><img class="img-fluid" style="min-height: 390px;" src="${product.url}" alt=""></a>
+              <div class="name">
+                <a href="${product.product_id[0]}"><h6 class="mt-2 mb-0">${product.name}</h6></a>
+                <p>${product.price.toLocaleString()} ₫</p>
+              </div>
+            </div>`;
+        });
+        document.querySelector('.row').innerHTML = productHTML;
+      }
+    };
+
+    // Xây dựng URL dựa trên lựa chọn từ dropdown
+    var baseUrl = "/category/soccer-shoes/nike/all?orderBy=";
+    var url = baseUrl + selectedOption;
+
+    // Gửi yêu cầu GET đến URL đã xây dựng
+    xhr.open("GET", url, true);
+    xhr.send();
+  });
+</script> -->

@@ -1,6 +1,7 @@
 import { product } from "../models/product.js";
 import { loginController } from "./loginController.js";
 
+
 var userName = '';
 var userStatus = '';
 async function getAllProductsNike(req, res) {

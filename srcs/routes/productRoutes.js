@@ -1,7 +1,10 @@
 import express from "express";
 import { productController } from "../controllers/ProductController.js";
+import bodyParser from "body-parser";
 
 const router = express.Router();
+router.use(bodyParser.json());
+
 
 router.get("/category/soccer-shoes/nike/all", productController.getAllProductsNike);
 router.get("/category/soccer-shoes/nike/:id", productController.getProductsById);
