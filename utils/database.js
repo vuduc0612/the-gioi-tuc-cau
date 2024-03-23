@@ -4,7 +4,7 @@ import sql from "mssql";
 
 const config = {
     user: 'sa',
-    password: '12345',
+    password: '123',
     server: 'localhost',
     database: 'the-gioi-tuc-cau',
     options: {

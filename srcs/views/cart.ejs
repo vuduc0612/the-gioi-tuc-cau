@@ -62,7 +62,7 @@
                                 </div><br>
                                 <a href="/deleteCartItem?itemId=<%= item.item_id %>"
                                     class="d-xl-none text-success link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Xóa
-                                    <span><i class="fas fa-trash"></i></span></a>
+                                    <span><i class="fas fa-trash" ></i></span></a>
                             </td>
                             <td id="item<%= item.item_id %>total"
                                 class="col-lg-2 col-3 d-none d-sm-table-cell align-middle">
@@ -70,9 +70,9 @@
                                     <% sumbill+=(item.price*item.quantity);%>
                             </td>
                             <td class="col-1 d-none d-xl-table-cell align-middle text-center">
-                                <a href="/deleteCartItem?itemId=<%= item.item_id %>" class="btn btn-success">
+                                <button class="btn btn-success" onclick="confirmDelete(<%= item.item_id %>)">
                                     <i class="fas fa-trash"></i>
-                                </a>
+                                </button>
                             </td>
                         </tr>
                     <% }); %>

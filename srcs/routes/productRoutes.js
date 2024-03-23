@@ -1,6 +1,5 @@
 import express from "express";
-import { productController } from "../controllers/ProductController.js";
-import bodyParser from "body-parser";
+import { productController } from "../controllers/productController.js";
 
 const router = express.Router();
 router.use(bodyParser.json());
