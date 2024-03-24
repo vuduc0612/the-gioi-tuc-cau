@@ -1,0 +1,17 @@
+DROP TABLE IF EXISTS [order];
+
+DROP TABLE IF EXISTS [item];
+
+DROP TABLE IF EXISTS [cart];
+
+DROP TABLE IF EXISTS [inventory];
+
+DROP TABLE IF EXISTS [productImage];
+
+DROP TABLE IF EXISTS [product];
+
+DROP TABLE IF EXISTS [category];
+
+DROP TABLE IF EXISTS [user];
+
+DROP TABLE IF EXISTS [admin];

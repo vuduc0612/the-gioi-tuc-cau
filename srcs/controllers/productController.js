@@ -285,6 +285,25 @@ async function getProductsById(req, res) {
     throw error;
   }
 }
+async function getProductsByKeyWord(req, res) {
+    try {
+        userName = loginController.getUser().userName;
+        userStatus = loginController.getUser().userStatus;
+        const keyWord = req.query.q;
+        const result = await product.getProductsByKeyWord(keyWord);
+        //console.log(result);
+        res.render("category.ejs", {
+            datas: result,
+            title: "Kết quả tìm kiếm",
+            userName,
+            userStatus,
+        });
+    } catch (error) {
+        res.status(500).send('Internal server error');
+        throw error;
+    }
+}
+
 const productController = {
   getAllProductsNike,
   getAllProductsAdidas,
@@ -295,5 +314,6 @@ const productController = {
   getAllProductsSock,
   getAllProductsTape,
   getProductsById,
+  getProductsByKeyWord
 };
 export { productController };

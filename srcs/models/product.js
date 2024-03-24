@@ -1,4 +1,5 @@
 import pool from "../../utils/database.js";
+import sql from 'mssql';
 
 async function getProductsByCategoryId(categoryId) {
     try {
@@ -69,5 +70,18 @@ async function getAllProducts() { //lấy các sản phẩm nổi bật nhất
         return []
     }
 }
-const product = { getProductsByCategoryId, getProductsById, getAllProducts, getProductsByCategoryIdOrderByHighToLow, getProductsByCategoryIdOrderByLowToHigh };
+async function getProductsByKeyWord(keyWord) {
+    try {
+        const request = pool.request();
+        request.input('keyWord', sql.NVarChar, keyWord);
+        const result = await request.query("SELECT * FROM product INNER JOIN productImage ON product.product_id = productImage.product_id WHERE product.name LIKE '%' + @keyWord + '%' and productImage.url like '%-1%';");
+        return result.recordset;
+        //console.log(result.recordset);
+        //console.log("kt:" + keyWord);
+    } catch (error) {
+        console.error('Failed to search products', error);
+        throw error;
+    }
+}
+const product = { getProductsByCategoryId, getProductsById, getAllProducts, getProductsByCategoryIdOrderByHighToLow, getProductsByCategoryIdOrderByLowToHigh, getProductsByKeyWord};
 export { product };
