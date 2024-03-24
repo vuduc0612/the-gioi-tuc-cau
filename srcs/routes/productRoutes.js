@@ -1,7 +1,8 @@
 import express from "express";
-import { productController } from "../controllers/ProductController.js";
+import { productController } from "../controllers/productController.js";
 
 const router = express.Router();
+
 
 router.get("/category/soccer-shoes/nike/all", productController.getAllProductsNike);
 router.get("/category/soccer-shoes/nike/:id", productController.getProductsById);
