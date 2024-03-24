@@ -24,5 +24,7 @@ router.get("/category/others/sock/:id", productController.getProductsById);
 router.get("/category/others/tape/all", productController.getAllProductsTape);
 router.get("/category/others/tape/:id", productController.getProductsById);
 
+router.get("/search", productController.getProductsByKeyWord);
+
 
 export const productRoutes = router;

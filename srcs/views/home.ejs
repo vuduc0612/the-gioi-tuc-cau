@@ -7,19 +7,22 @@
         <div class="row row-cols-1 row-cols-md-4">
             <% for(let i=0; i < 4; i++) { %>
                 <div class="col d-flex align-items-stretch">
-                    <div class="card h-100">
-                        <% if(products[i].url) { %>
-                            <img src="<%= products[i].url %>" class="card-img-top" alt="<%= products[i].name %>">
-                            <% } %>
-                                <div class="card-body">
-                                    <h5 class="card-title">
-                                        <%= products[i].name %>
-                                    </h5>
-                                    <p class="card-text"><strong>
-                                            <%= products[i].price %>đ
-                                        </strong></p>
-                                </div>
-                    </div>
+                    <a href="category/soccer-shoes/nike/<%= products[i].product_id[0] %>"
+                        class="text-decoration-none">
+                        <div class="card h-100">
+                            <% if(products[i].url) { %>
+                                <img src="<%= products[i].url %>" class="card-img-top" alt="<%= products[i].name %>">
+                                <% } %>
+                                    <div class="card-body">
+                                        <h5 class="card-title">
+                                            <%= products[i].name %>
+                                        </h5>
+                                        <p class="card-text"><strong>
+                                                <%= products[i].price %>đ
+                                            </strong></p>
+                                    </div>
+                        </div>
+                    </a>
                 </div>
                 <% } %>
         </div>
