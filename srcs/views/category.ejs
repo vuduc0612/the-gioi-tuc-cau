@@ -13,10 +13,9 @@
     </div>
     <div class="col-3 d-flex align-items-center">
       <select class="form-select form-select-sm" id="sortOptions">
-        <option value="default" selected>Thứ tự mặc định</option>
-        <option value="newest">Mới nhất</option>
-        <option value="lowToHigh">Thứ tự theo giá: thấp đến cao</option>
-        <option value="highToLow">Thứ tự theo giá: cao đến thấp</option>
+        <option class="default" value="default" >Thứ tự mặc định</option>
+        <option class="lowToHigh" value="lowToHigh">Thứ tự theo giá: thấp đến cao</option>
+        <option class="highToLow" value="highToLow">Thứ tự theo giá: cao đến thấp</option>
       </select>
     </div>
   </div>
@@ -38,40 +37,30 @@
     </div>
   </div>
 </main>
-<%- include('partials/footer') %>
 
-<!-- <script>
-  document.getElementById("sortOptions").addEventListener("change", function(event) {
-    event.preventDefault(); // Ngăn chặn hành vi mặc định của form hoặc thẻ select
-
-    var selectedOption = this.value;
-    console.log(selectedOption);
-    var xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function() {
-      if (xhr.readyState == 4 && xhr.status == 200) {
-        // Xử lý dữ liệu sản phẩm đã nhận được từ máy chủ
-        var productList = JSON.parse(xhr.responseText);
-        var productHTML = '';
-        productList.forEach(function(product) {
-          productHTML += `
-            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 p-2 image-cus">
-              <a href="${product.product_id[0]}"><img class="img-fluid" style="min-height: 390px;" src="${product.url}" alt=""></a>
-              <div class="name">
-                <a href="${product.product_id[0]}"><h6 class="mt-2 mb-0">${product.name}</h6></a>
-                <p>${product.price.toLocaleString()} ₫</p>
-              </div>
-            </div>`;
-        });
-        document.querySelector('.row').innerHTML = productHTML;
+<script>
+  if("<%= opt %>" !== ""){
+    document.querySelector(".<%= opt %>").setAttribute("selected", "");
+  }
+  document.getElementById('sortOptions').addEventListener('change', function() {
+    var orderBy = this.value;
+    var options = this.options;
+    for (var i = 0; i < options.length; i++) {
+      if (options[i].value === orderBy) {
+        options[i].selected = true; // Đánh dấu tùy chọn đã chọn
+        console.log(1);
+      } else {
+        options[i].selected = false; // Bỏ đánh dấu các tùy chọn khác
       }
-    };
-
-    // Xây dựng URL dựa trên lựa chọn từ dropdown
-    var baseUrl = "/category/soccer-shoes/nike/all?orderBy=";
-    var url = baseUrl + selectedOption;
-
-    // Gửi yêu cầu GET đến URL đã xây dựng
-    xhr.open("GET", url, true);
-    xhr.send();
+    }
+    var currentURL = window.location.href;
+    var baseUrl = currentURL.split('?')[0];
+    var newURL = baseUrl + '?orderBy=' + orderBy;
+    if(orderBy === 'default'){
+      newURL = baseUrl;
+      console.log(100);
+    }
+    window.location.href = newURL;
   });
-</script> -->
+</script>
+<%- include('partials/footer') %>

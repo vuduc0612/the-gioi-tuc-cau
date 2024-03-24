@@ -31,7 +31,7 @@ async function getHomePage(req, res) {
 
 async function register(req, res) {
   const { username, email, password } = req.body;
-  console.log(req.body);
+  //console.log(req.body);
   try {
     const success = await user.registerUser(username, email, password);
     if (success) {
@@ -47,7 +47,7 @@ async function register(req, res) {
 
 async function login(req, res) {
   const { email, password } = req.body;
-  console.log(req.body);
+  //console.log(req.body);
   try {
     const userData = await user.loginUser(email, password, req); // Truyền req vào loginUser để truy cập session
     if (userData) {

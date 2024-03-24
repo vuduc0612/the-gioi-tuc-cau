@@ -1,9 +1,9 @@
 
 import pool from "../../utils/database.js";
 
-async function addItem(req, productId, quantity, size, cardId) {
-    
+async function addItem(req, productId, quantity, size, cardId) {  
   try {
+    //console.log(req.session.user);
     const request = pool.request();
     request.input("productId", productId);
     request.input("size", size);
@@ -12,11 +12,11 @@ async function addItem(req, productId, quantity, size, cardId) {
       "SELECT * FROM product INNER JOIN inventory ON product.product_id = inventory.product_id" +
         " WHERE product.product_id = @productId AND inventory.size = @size AND inventory.quantity > 0;"
     );
-    console.log(checkInventory);
+    //console.log(checkInventory);
     if (checkInventory.recordset.length > 0) {
       const sku = checkInventory.recordset[0].sku;
       const cartId = req.session.user.cart_id;
-      console.log(cardId); // Hàm này cần phải được triển khai để lấy cartId từ userId
+      //console.log(cardId); // Hàm này cần phải được triển khai để lấy cartId từ userId
       request.input("cartId", cartId);
       request.input("sku", sku);
       request.input("quantity", quantity);
