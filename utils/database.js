@@ -3,9 +3,9 @@
 import sql from "mssql";
 
 const config = {
-    user: 'admin',
-    password: '23112003',
-    server: 'tgtc.cj208wi82h20.ap-southeast-1.rds.amazonaws.com',
+    user: 'tckadmin',
+    password: 'Tckzeros11',
+    server: 'tck.database.windows.net',
     database: 'the-gioi-tuc-cau',
     options: {
         encrypt: false
