@@ -3,12 +3,12 @@
 import sql from "mssql";
 
 const config = {
-    user: 'sa',
-    password: '12345',
-    server: 'localhost',
+    user: 'tckadmin',
+    password: 'Tckzeros11',
+    server: 'tck.database.windows.net',
     database: 'the-gioi-tuc-cau',
     options: {
-        encrypt: false
+        encrypt: true
     }
 };
 // Tạo pool kết nối
