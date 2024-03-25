@@ -8,7 +8,7 @@ const config = {
     server: 'tck.database.windows.net',
     database: 'the-gioi-tuc-cau',
     options: {
-        encrypt: false
+        encrypt: true
     }
 };
 // Tạo pool kết nối
