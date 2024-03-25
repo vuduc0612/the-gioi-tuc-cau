@@ -53,7 +53,8 @@
         options[i].selected = false; // Bỏ đánh dấu các tùy chọn khác
       }
     }
-    var currentURL = window.location.href;
+    var key = "<%= type %>";
+    var currentURL = `http://localhost:3000/category/soccer-shoes/${key}/all`;
     var baseUrl = currentURL.split('?')[0];
     var newURL = baseUrl + '?orderBy=' + orderBy;
     if(orderBy === 'default'){
