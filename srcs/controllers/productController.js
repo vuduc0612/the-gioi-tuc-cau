@@ -5,6 +5,7 @@ let userName = "";
 let userStatus = "Đăng nhập";
 let userId = "0";
 let cartId = "0";
+let type = "";
 async function getAllProductsNike(req, res) {
   const key = req.query.orderBy;
   try {
@@ -21,21 +22,23 @@ async function getAllProductsNike(req, res) {
       cartId = "0";
     } // Truy cập dữ liệu người dùng từ session
     var result;
-    if(key === "lowToHigh"){
+    if (key === "lowToHigh") {
       result = await product.getProductsByCategoryIdOrderByLowToHigh(1);
     }
-    else if(key == "highToLow"){
+    else if (key == "highToLow") {
       result = await product.getProductsByCategoryIdOrderByHighToLow(1);
     }
-    else{
+    else {
       result = await product.getProductsByCategoryId(1);
     }
+    type = "nike";
     res.render("category.ejs", {
       datas: result,
       title: "Giày Đá Bóng NIKE",
       userName: userName, // Sử dụng dữ liệu người dùng từ session
       userStatus: userStatus,
       opt: key,
+      type: type,
     });
   } catch (error) {
     res.status(500).send("Internal server error");
@@ -57,13 +60,14 @@ async function getAllProductsAdidas(req, res) {
       cartId = "0";
     }
     var result;
-    if(key === "lowToHigh"){
+    let type = 'adidas';
+    if (key === "lowToHigh") {
       result = await product.getProductsByCategoryIdOrderByLowToHigh(2);
     }
-    else if(key == "highToLow"){
+    else if (key == "highToLow") {
       result = await product.getProductsByCategoryIdOrderByHighToLow(2);
     }
-    else{
+    else {
       result = await product.getProductsByCategoryId(2);
     }
     res.render("category.ejs", {
@@ -72,6 +76,7 @@ async function getAllProductsAdidas(req, res) {
       userName,
       userStatus,
       opt: key,
+      type: type,
     });
   } catch (error) {
     res.status(500).send("Internal server error");
@@ -93,13 +98,14 @@ async function getAllProductsMizuno(req, res) {
       cartId = "0";
     }
     var result;
-    if(key === "lowToHigh"){
+    let type = 'mizuno';
+    if (key === "lowToHigh") {
       result = await product.getProductsByCategoryIdOrderByLowToHigh(3);
     }
-    else if(key == "highToLow"){
+    else if (key == "highToLow") {
       result = await product.getProductsByCategoryIdOrderByHighToLow(3);
     }
-    else{
+    else {
       result = await product.getProductsByCategoryId(3);
     }
     res.render("category.ejs", {
@@ -108,6 +114,7 @@ async function getAllProductsMizuno(req, res) {
       userName,
       userStatus,
       opt: key,
+      type: type,
     });
   } catch (error) {
     res.status(500).send("Internal server error");
@@ -129,13 +136,14 @@ async function getAllProductsBall(req, res) {
       cartId = "0";
     }
     var result;
-    if(key === "lowToHigh"){
+    let type = 'ball';
+    if (key === "lowToHigh") {
       result = await product.getProductsByCategoryIdOrderByLowToHigh(4);
     }
-    else if(key == "highToLow"){
+    else if (key == "highToLow") {
       result = await product.getProductsByCategoryIdOrderByHighToLow(4);
     }
-    else{
+    else {
       result = await product.getProductsByCategoryId(4);
     }
     res.render("category.ejs", {
@@ -144,6 +152,7 @@ async function getAllProductsBall(req, res) {
       userName,
       userStatus,
       opt: key,
+      type: type,
     });
   } catch (error) {
     res.status(500).send("Internal server error");
@@ -165,13 +174,14 @@ async function getAllProductsGlove(req, res) {
       cartId = "0";
     }
     var result;
-    if(key === "lowToHigh"){
+    let type = 'glove';
+    if (key === "lowToHigh") {
       result = await product.getProductsByCategoryIdOrderByLowToHigh(5);
     }
-    else if(key == "highToLow"){
+    else if (key == "highToLow") {
       result = await product.getProductsByCategoryIdOrderByHighToLow(5);
     }
-    else{
+    else {
       result = await product.getProductsByCategoryId(5);
     }
     res.render("category.ejs", {
@@ -180,6 +190,7 @@ async function getAllProductsGlove(req, res) {
       userName,
       userStatus,
       opt: key,
+      type,
     });
   } catch (error) {
     res.status(500).send("Internal server error");
@@ -200,14 +211,15 @@ async function getAllProductsSock(req, res) {
       userId = "0";
       cartId = "0";
     }
+    let type = 'sock';
     var result;
-    if(key === "lowToHigh"){
+    if (key === "lowToHigh") {
       result = await product.getProductsByCategoryIdOrderByLowToHigh(6);
     }
-    else if(key == "highToLow"){
+    else if (key == "highToLow") {
       result = await product.getProductsByCategoryIdOrderByHighToLow(6);
     }
-    else{
+    else {
       result = await product.getProductsByCategoryId(6);
     }
     res.render("category.ejs", {
@@ -216,6 +228,7 @@ async function getAllProductsSock(req, res) {
       userName,
       userStatus,
       opt: key,
+      type
     });
   } catch (error) {
     res.status(500).send("Internal server error");
@@ -235,15 +248,15 @@ async function getAllProductsTape(req, res) {
       userStatus = "Đăng nhập";
       userId = "0";
       cartId = "0";
-    }
+    }let type = 'tape';
     var result;
-    if(key === "lowToHigh"){
+    if (key === "lowToHigh") {
       result = await product.getProductsByCategoryIdOrderByLowToHigh(7);
     }
-    else if(key == "highToLow"){
+    else if (key == "highToLow") {
       result = await product.getProductsByCategoryIdOrderByHighToLow(7);
     }
-    else{
+    else {
       result = await product.getProductsByCategoryId(7);
     }
     res.render("category.ejs", {
@@ -252,6 +265,7 @@ async function getAllProductsTape(req, res) {
       userName,
       userStatus,
       opt: key,
+      type,
     });
   } catch (error) {
     res.status(500).send("Internal server error");
@@ -259,7 +273,7 @@ async function getAllProductsTape(req, res) {
   }
 }
 async function getProductsById(req, res) {
-   
+
   try {
     if (req.session.user) {
       //console.log('san pham');
@@ -286,22 +300,35 @@ async function getProductsById(req, res) {
   }
 }
 async function getProductsByKeyWord(req, res) {
-    try {
-        userName = loginController.getUser().userName;
-        userStatus = loginController.getUser().userStatus;
-        const keyWord = req.query.q;
-        const result = await product.getProductsByKeyWord(keyWord);
-        //console.log(result);
-        res.render("category.ejs", {
-            datas: result,
-            title: "Kết quả tìm kiếm",
-            userName,
-            userStatus,
-        });
-    } catch (error) {
-        res.status(500).send('Internal server error');
-        throw error;
+  try {
+    if (req.session.user) {
+      userName = req.session.user.username;
+      userId = req.session.user.user_id;
+      cartId = req.session.user.cart_id;
+      userStatus = "Đăng xuất";
+    } else {
+      userName = "";
+      userStatus = "Đăng nhập";
+      userId = "0";
+      cartId = "0";
     }
+    const keyWord = req.query.q;
+    const key = req.query.orderBy;
+    const result = await product.getProductsByKeyWord(keyWord);
+    //console.log(result);
+    res.render("category.ejs", {
+      datas: result,
+      title: "Kết quả tìm kiếm",
+      userName,
+      userStatus,
+      opt: key,
+      type: type,
+    });
+  } catch (error) {
+    res.status(500).send('Internal server error');
+    throw error;
+  }
+
 }
 
 const productController = {
