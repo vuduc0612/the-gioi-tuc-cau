@@ -1,0 +1,47 @@
+<%- include("partials/adminHeader.ejs") %>
+
+
+    <div class="app-wrapper">
+
+        <div class="app-content pt-3 p-md-3 p-lg-4">
+            <div class="container-xl">
+
+                <h1 class="app-page-title">Inventory</h1>
+
+                <div class="d-flex flex-wrap justify-content-start mb-3">
+                    <% datas.forEach(product => { %>
+                        <div class="mb-2 p-2 col-lg-4 col-xxl-3 col-sm-6">
+                            <div id="" class="app-card hover-shadow app-card-stat shadow-sm h-100">
+                                <div class="app-card-body p-1 p-sm-2 row">
+                                    <div scope="row" class="col h-100 align-middle">
+                                        <img src="<%= product.product_image_url %>"
+                                            class="w-100 rounded" alt="ảnh giày">
+                                    </div>
+                                    <div class="col p-3">
+                                        <h6 class="card-title text-start"><%= product.product_name %></h6>
+                                        <p class="card-text text-start">SL: <%= product.remaining_quantity %><br><%= product.price/1000 %>k</p>
+                                    </div>
+                                </div>
+                                <a class="app-card-link-mask" href="/myProduct?product_id=<%= product.product_id %>"></a>
+                            </div>
+                        </div>
+                        <% }) %>
+                    <div class="mb-2 p-2 col-lg-4 col-xxl-3 col-sm-6">
+                        <div id="" class="app-card hover-shadow app-card-stat shadow-sm h-100">
+                            <div class="app-card-body p-1 p-sm-2 row">
+                                    <h5 class="card-title text-center">Thêm sản phẩm mới</h5>
+                                    <h5 class="card-title text-center">+</h5>
+                                </div>
+                            </div>
+                            <!-- <a class="app-card-link-mask" href="#"></a> -->
+                        </div>
+                    </div>
+                </div>
+
+            </div><!--//container-fluid-->
+        </div><!--//app-content-->
+
+    </div><!--//app-wrapper-->
+
+
+    <%- include("partials/adminFooter.ejs") %>

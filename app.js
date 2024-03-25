@@ -4,6 +4,7 @@ import bodyParser from "body-parser";
 import { loginRoutes } from "./srcs/routes/loginRoutes.js";
 import {productRoutes} from "./srcs/routes/productRoutes.js";
 import { carRoutes } from "./srcs/routes/cartRoutes.js";
+import { adminRoutes } from "./srcs/routes/adminRoutes.js";
 
 
 const port = 3000;
@@ -17,6 +18,7 @@ configViewEngine(app);
 app.use("/", loginRoutes);
 app.use("/", productRoutes);
 app.use("/", carRoutes);
+app.use("/", adminRoutes);
 
 app.listen(port, () => {
     console.log(`Server is running on ${port}`);
