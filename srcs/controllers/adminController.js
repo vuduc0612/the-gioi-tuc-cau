@@ -7,7 +7,7 @@ async function getAllBills(req, res) {
     try {
         const result = await admin.getAllBills();
         console.log(result);
-        res.render('admin.ejs', {allBills: result})
+        res.render('admin.ejs', {allBills: result});
     } catch (error) {
         res.status(500).send('Internal server error');
         throw error;
@@ -23,7 +23,7 @@ async function getBillById(req, res) {
         const billId = req.query.id;
         const result = await admin.getBillById(billId);
         console.log(result);
-        res.render('admin.ejs')
+        res.render('adminBill.ejs', {billDatas: result});
     } catch (error) {
         res.status(500).send('Internal server error');
         throw error;

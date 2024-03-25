@@ -1,0 +1,61 @@
+<%- include("partials/adminHeader.ejs") %>
+
+
+    <div class="app-wrapper">
+
+        <div class="app-content pt-3 p-md-3 p-lg-4">
+            <div class="container-xl">
+                <h1 class="app-page-title mb-3">Đơn hàng #<%= billDatas[0].order_id %></h1>
+
+                <div class="p-4 shadow-sm bg-body w-100 ">
+                    <%= billDatas[0].order_date.toLocaleDateString() %> <br><br>
+
+                    <dl class="row">
+                        <dt class="col-sm-3">Tên khách hàng</dt>
+                        <dd class="col-sm-9"><%= billDatas[0].customer_name %></dd>
+                        
+                        <dt class="col-sm-3">Email</dt>
+                        <dd class="col-sm-9"><%= billDatas[0].customer_email %></dd>
+                        
+                        <dt class="col-sm-3">Số điện thoại</dt>
+                        <dd class="col-sm-9"><%= billDatas[0].customer_phone %></dd>
+
+                        <dt class="col-sm-3">Địa chỉ</dt>
+                        <dd class="col-sm-9"><%= billDatas[0].customer_address %></dd>
+                        
+                        <dt class="col-sm-3 text-truncate">Tổng hóa đơn</dt>
+                        <dd class="col-sm-9"><%= billDatas[0].total_bill %></dd>
+                    </dl>
+
+                    <div class="table-responsive-md">
+                        <table class="table">
+                            <thead>
+                              <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Tên sản phẩm</th>
+                                <th scope="col">Số lượng</th>
+                                <th scope="col">Đơn giá</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                                <% billDatas.forEach(product => { %>
+                                    <tr>
+                                        <th><img src="<%= product.product_image %>" style="max-width: 100px;" alt=""></th>
+                                        <td><%= product.product_name %></td>
+                                        <td><%= product.total_quantity %></td>
+                                        <td><%= product.product_price.toLocaleString() %></td>
+                                    </tr>
+                                <% }); %>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                </div>
+
+            </div><!--//container-fluid-->
+        </div><!--//app-content-->
+
+    </div><!--//app-wrapper-->
+
+
+    <%- include("partials/adminFooter.ejs") %>
