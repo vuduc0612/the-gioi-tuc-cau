@@ -98,5 +98,21 @@ async function updateInventoryQuantity(cartId) {
   }
 }
 
-const cart = { getCartData, updateStatusCart, addCart, updateTotalPrice, updateInventoryQuantity };
+async function updateCartItemQuantity(itemId, quantity) {
+  try {
+    const request = pool.request();
+    await request.query(`
+      UPDATE [item]
+      SET quantity = ${quantity}
+      FROM [item]
+      WHERE [item].[item_id] = ${itemId};    
+    `);
+    return 1;
+  } catch (error) {
+    console.error("Error update total Price:", error);
+    throw error;
+  }
+}
+
+const cart = { getCartData, updateStatusCart, addCart, updateTotalPrice, updateInventoryQuantity, updateCartItemQuantity };
 export { cart };
