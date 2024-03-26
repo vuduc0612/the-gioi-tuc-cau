@@ -1,7 +1,8 @@
 import express from "express";
-import { productController } from "../controllers/ProductController.js";
+import { productController } from "../controllers/productController.js";
 
 const router = express.Router();
+
 
 router.get("/category/soccer-shoes/nike/all", productController.getAllProductsNike);
 router.get("/category/soccer-shoes/nike/:id", productController.getProductsById);
@@ -23,6 +24,8 @@ router.get("/category/others/sock/:id", productController.getProductsById);
 
 router.get("/category/others/tape/all", productController.getAllProductsTape);
 router.get("/category/others/tape/:id", productController.getProductsById);
+
+router.get("/search", productController.getProductsByKeyWord);
 
 
 export const productRoutes = router;
