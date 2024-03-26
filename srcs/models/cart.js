@@ -81,5 +81,22 @@ async function updateTotalPrice(cartId, totalPrice) {
   }
 }
 
-const cart = { getCartData, updateStatusCart, addCart, updateTotalPrice };
+async function updateInventoryQuantity(cartId) {
+  try {
+    const request = pool.request();
+    await request.query(`
+      UPDATE inventory
+      SET quantity = inventory.quantity - item.quantity
+      FROM inventory
+      INNER JOIN item ON inventory.sku = item.sku
+      WHERE item.cart_id = ${cartId};    
+    `);
+    return 1;
+  } catch (error) {
+    console.error("Error update total Price:", error);
+    throw error;
+  }
+}
+
+const cart = { getCartData, updateStatusCart, addCart, updateTotalPrice, updateInventoryQuantity };
 export { cart };
