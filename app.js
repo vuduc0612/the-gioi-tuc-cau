@@ -6,7 +6,7 @@ import bodyParser from "body-parser";
 import session from 'express-session';
 import { loginRoutes } from "./srcs/routes/loginRoutes.js";
 import {productRoutes} from "./srcs/routes/productRoutes.js";
-import { carRoutes } from "./srcs/routes/cartRoutes.js";
+import { cartRoutes } from "./srcs/routes/cartRoutes.js";
 import { adminRoutes } from "./srcs/routes/adminRoutes.js";
 
 
