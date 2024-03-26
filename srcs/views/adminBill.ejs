@@ -24,7 +24,7 @@
                         <dd class="col-sm-9"><%= billDatas[0].customer_address %></dd>
                         
                         <dt class="col-sm-3 text-truncate">Tổng hóa đơn</dt>
-                        <dd class="col-sm-9"><%= billDatas[0].total_bill %></dd>
+                        <dd class="col-sm-9"><%= billDatas[0].total_bill.toLocaleString() %></dd>
                     </dl>
 
                     <div class="table-responsive-md">

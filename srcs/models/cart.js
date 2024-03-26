@@ -65,5 +65,21 @@ async function addCart(userId) {
     throw error;
   }
 }
-const cart = { getCartData, updateStatusCart, addCart };
+
+async function updateTotalPrice(cartId, totalPrice) {
+  try {
+    const request = pool.request();
+    await request.query(`
+      UPDATE [dbo].[cart]
+      SET [total_price] = ${totalPrice}
+      WHERE [cart_id] = ${cartId};
+    `);
+    return 1;
+  } catch (error) {
+    console.error("Error update total Price:", error);
+    throw error;
+  }
+}
+
+const cart = { getCartData, updateStatusCart, addCart, updateTotalPrice };
 export { cart };

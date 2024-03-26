@@ -134,6 +134,7 @@ async function finishCheckout(req, res) {
       userId
     );
     const addOrderStatement = await order.addOrder(cartId, date, data.address);
+    cart.updateTotalPrice(cartId, req.body.totalPrice);
 
     if (updateStatement && addOrderStatement) {
       const updateStatusCart = await cart.updateStatusCart(userId, cartId);

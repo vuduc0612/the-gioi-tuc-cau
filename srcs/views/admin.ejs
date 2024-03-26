@@ -75,7 +75,7 @@
                                             <td class="cell"><%= bill.customer_name %></td>
                                             <td class="cell"><%= bill.order_date.toLocaleDateString() %></td>
                                             <td class="cell"><%= bill.address%></td>
-                                            <td class="cell"><%= bill.total_bill %></td>
+                                            <td class="cell"><%= bill.total_bill.toLocaleString() %></td>
                                             <td class="cell"><a class="btn-sm app-btn-secondary" href="/myBill?id=<%= bill.order_id %>">View</a>
                                             </td>
                                         </tr>
