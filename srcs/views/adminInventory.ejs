@@ -6,7 +6,7 @@
         <div class="app-content pt-3 p-md-3 p-lg-4">
             <div class="container-xl">
 
-                <h1 class="app-page-title">Inventory</h1>
+                <h1 class="app-page-title">Kho hàng</h1>
 
                 <div class="d-flex flex-wrap justify-content-start mb-3">
                     <% datas.forEach(product => { %>
@@ -19,10 +19,10 @@
                                     </div>
                                     <div class="col p-3">
                                         <h6 class="card-title text-start"><%= product.product_name %></h6>
-                                        <p class="card-text text-start">SL: <%= product.remaining_quantity %><br><%= product.price/1000 %>k</p>
+                                        <p class="card-text text-start">Số lượng: <%= product.remaining_quantity %><br><%= product.price/1000 %>k</p>
                                     </div>
                                 </div>
-                                <a class="app-card-link-mask" href="/myProduct?product_id=<%= product.product_id %>"></a>
+                                <a class="app-card-link-mask" href="/myProduct?id=<%= product.product_id %>"></a>
                             </div>
                         </div>
                         <% }) %>

@@ -58,6 +58,7 @@ async function getBillById(bill_id) {
                 u.email AS customer_email,
                 u.phone AS customer_phone,
                 p.name AS product_name,
+                inv.size AS product_size,
                 p.price AS product_price,
                 (SELECT TOP 1 url FROM productImage WHERE product_id = p.product_id) AS product_image,
                 SUM(i.quantity) AS total_quantity
@@ -85,6 +86,7 @@ async function getBillById(bill_id) {
                 u.phone,
                 p.product_id,
                 p.name,
+                inv.size,
                 p.price;
         `)
         if (result) {
@@ -135,13 +137,35 @@ async function getProductById(product_id) {
     try {
         const request = pool.request();
         const result = await request.query(`
-            SELECT *
-            FROM product
-            WHERE product.product_id = ${product_id};
+            SELECT 
+                p.product_id,
+                p.name AS product_name,
+                p.description AS product_description,
+                p.price AS product_price,
+                p.color AS product_color,
+                inv.sku AS sku,
+                inv.size AS inventory_size,
+                inv.quantity AS inventory_quantity,
+                c.category_id AS category_id,
+                c.name AS category_name,
+                c.description AS category_description,
+                (
+                    SELECT TOP 1 url 
+                    FROM productImage 
+                    WHERE product_id = p.product_id
+                ) AS product_image
+            FROM 
+                product p
+            JOIN 
+                inventory inv ON p.product_id = inv.product_id
+            JOIN 
+                category c ON p.category_id = c.category_id
+            WHERE 
+                p.product_id = ${product_id};
         `)
         if (result) {
             //console.log(result.recordset);
-            return result.recordset[0];
+            return result.recordset;
         }
         else {
             console.log('No data available');
@@ -153,5 +177,25 @@ async function getProductById(product_id) {
     }
 }
 
-const admin = { getAllBills, getAllProducts, getProductById, getBillById};
+async function getCategoryDatas() {
+    try {
+        const request = pool.request();
+        const result = await request.query(`
+            SELECT * FROM [dbo].[category];
+        `)
+        if (result) {
+            //console.log(result.recordset);
+            return result.recordset;
+        }
+        else {
+            console.log('No data available');
+            return null;
+        }
+
+    } catch (error) {
+        console.error('Error fetching data from database:', error);
+    }
+}
+
+const admin = { getAllBills, getAllProducts, getProductById, getBillById, getCategoryDatas};
 export { admin };

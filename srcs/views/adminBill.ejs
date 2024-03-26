@@ -5,7 +5,7 @@
 
         <div class="app-content pt-3 p-md-3 p-lg-4">
             <div class="container-xl">
-                <h1 class="app-page-title mb-3">Đơn hàng #<%= billDatas[0].order_id %></h1>
+                <h1 class="app-page-title mb-3">Chi tiết đơn hàng #<%= billDatas[0].order_id %></h1>
 
                 <div class="p-4 shadow-sm bg-body w-100 ">
                     <%= billDatas[0].order_date.toLocaleDateString() %> <br><br>
@@ -33,6 +33,7 @@
                               <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Tên sản phẩm</th>
+                                <th scope="col">Size</th>
                                 <th scope="col">Số lượng</th>
                                 <th scope="col">Đơn giá</th>
                               </tr>
@@ -42,6 +43,7 @@
                                     <tr>
                                         <th><img src="<%= product.product_image %>" style="max-width: 100px;" alt=""></th>
                                         <td><%= product.product_name %></td>
+                                        <td><%= product.product_size %></td>
                                         <td><%= product.total_quantity %></td>
                                         <td><%= product.product_price.toLocaleString() %></td>
                                     </tr>
