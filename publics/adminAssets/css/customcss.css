@@ -1,3 +1,12 @@
 .hover-shadow:hover {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1) !important;
+}
+
+
+textarea.form-control {
+    padding-top: .6rem;
+    padding-bottom: .6rem;
+    height: auto;
+    border-color: #e7e9ed;
+    color: #5d6778
 }

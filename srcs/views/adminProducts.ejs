@@ -4,21 +4,22 @@
 
     <div class="app-content pt-3 p-md-3 p-lg-4">
         <div class="container-xl">
-            <h1 class="app-page-title mb-4">Chi tiết sản phẩm</h1>
+            <h1 class="app-page-title mb-4">Chi tiết sản phẩm #<%= productDatas[0].product_id %></h1>
 
-            <form id="productdetail" class="bg-body shadow-sm p-4">
+            <form id="productdetail" class="bg-body shadow-sm p-4" method="post" action="/updateProductInformation">
+                <input type="hidden" name="product_id" value="<%= productDatas[0].product_id %>">
                 <div class="mb-3">
                     <label for="productName" class="form-label">Tên sản phẩm</label>
-                    <input type="text" class="form-control" id="productName" value="<%= productDatas[0].product_name %>">
+                    <input type="text" class="form-control" id="productName" name="product_name" value="<%= productDatas[0].product_name %>">
                 </div>
                 <div class="row">
                     <div class="mb-3 col-md-6">
                         <label for="productColor" class="form-label">Màu sắc</label>
-                        <input type="text" class="form-control" id="productColor" value="<%= productDatas[0].product_color %>">
+                        <input type="text" class="form-control" id="productColor" name="product_color" value="<%= productDatas[0].product_color %>">
                     </div>
                     <div class="mb-3 col-md-6">
                         <label for="productCategory" class="form-label">Phân loại sản phẩm</label>
-                        <select class="form-select" name="productCategory" id="productCategory">
+                        <select class="form-select" name="product_category" id="productCategory">
                             <option value="0" disabled>-- chọn --</option>
                             <% categoryDatas.forEach (category => { %>
                                 <option id="category_<%= category.category_id%>" value="<%= category.category_id%>"><%= category.name %></option>
@@ -28,21 +29,33 @@
                 </div>
                 <div class="mb-3">
                     <label for="productPrice" class="form-label">Giá bán (VND)</label>
-                    <input type="number" class="form-control" id="productPrice" value="<%= productDatas[0].product_price %>">
+                    <input type="number" class="form-control" id="productPrice" name="product_price" value="<%= productDatas[0].product_price %>">
                 </div>
                 <div class="mb-3">
                     <label for="productDiscription" class="form-label">Mô tả sản phẩm</label>
-                    <textarea class="form-control" id="productDiscription" rows="3"><%= productDatas[0].product_description %></textarea>
+                    <textarea class="form-control" id="productDiscription" name="product_description" rows="5"><%= productDatas[0].product_description %></textarea>
                 </div>
                 <hr class="mb-3">
-                <div class="mb-3 form-check">
+
+                <!-- thong tin ton kho -->
+                <h6 class="mb-3">Số lượng tồn kho:</h6>
+                <div class="d-flex flex-wrap flex-row justify-content-start">
+                    <% inventoryDatasByProd.forEach(stock => { %>
+                        <div class="me-3 mb-3" style="width: 100px;">
+                            <label for="size_<%= stock.size %>_quantity" class="form-label">size <%= stock.size %>:</label>
+                            <input type="number" class="form-control" id="size_<%= stock.size %>_quantity" name="<%= stock.size %>" value="<%= stock.quantity %>">
+                        </div>
+                    <% }); %>
+                </div>
+
+                <div class="d-none mb-3 form-check">
                     <input type="checkbox" class="form-check-input" id="productAvail"  checked disabled>
                     <label class="form-check-label" for="productAvail">Đăng bán sản phẩm</label>
                 </div>
                 <button type="submit" class="btn btn-primary text-white m-1">Hoàn tất chỉnh sửa</button>
                 
                 <!-- Button trigger modal -->
-                <button type="button" class="btn btn-secondary m-1" data-bs-toggle="modal" data-bs-target="#confirmModal">
+                <button type="button" class="d-none btn btn-secondary m-1" data-bs-toggle="modal" data-bs-target="#confirmModal">
                     Xóa sản phẩm
                 </button>
                 <!-- Modal delete -->

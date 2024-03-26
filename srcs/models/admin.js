@@ -197,5 +197,73 @@ async function getCategoryDatas() {
     }
 }
 
-const admin = { getAllBills, getAllProducts, getProductById, getBillById, getCategoryDatas};
+async function getInventoryDatasByProductId(product_id) {
+    try {
+        const request = pool.request();
+        const result = await request.query(`
+            SELECT * FROM [dbo].[inventory] WHERE [product_id] = ${product_id};
+        `)
+        if (result) {
+            //console.log(result.recordset);
+            return result.recordset;
+        }
+        else {
+            console.log('No data available');
+            return null;
+        }
+
+    } catch (error) {
+        console.error('Error fetching data from database:', error);
+    }
+}
+
+async function updateProductInformation(newProductDatas) {
+    try {
+        const request = pool.request();
+        const productId = newProductDatas.product_id;
+        request.input('productId', newProductDatas.product_id);
+        request.input('name', newProductDatas.product_name);
+        request.input('description', newProductDatas.product_description);
+        request.input('price', newProductDatas.product_price);
+        request.input('color', newProductDatas.product_color);
+        request.input('categoryId', newProductDatas.product_category);
+        
+        // Cập nhật thông tin của sản phẩm
+        const updateProductQuery = `
+            UPDATE product
+            SET 
+                name = @name,
+                description = @description,
+                price = @price,
+                color = @color,
+                category_id = @categoryId
+            WHERE
+                product_id = @productId;
+        `;
+        
+        // Thực thi truy vấn cập nhật thông tin sản phẩm
+        await request.query(updateProductQuery);
+
+        // Cập nhật số lượng tồn kho của sản phẩm
+        for (let size=38; size<=44; size++) {
+            const quantity = newProductDatas[size.toString()];
+            await request.query(`
+                UPDATE inventory
+                SET 
+                    quantity = ${quantity}
+                WHERE
+                    product_id = ${productId}
+                    AND size = ${size}
+            `);
+        }
+        
+        return true; // Trả về true nếu cập nhật thành công
+    } catch (error) {
+        console.error('Error updating product information:', error);
+        throw error;
+    }
+}
+
+
+const admin = { getAllBills, getAllProducts, getProductById, getBillById, getCategoryDatas, getInventoryDatasByProductId, updateProductInformation};
 export { admin };
