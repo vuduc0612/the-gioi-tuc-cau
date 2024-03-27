@@ -10,7 +10,7 @@ async function getAllProductsNike(req, res) {
   const key = req.query.orderBy;
   try {
     if (req.session.user) {
-      console.log('nike');
+      //console.log('nike');
       userName = req.session.user.username;
       userId = req.session.user.user_id;
       cartId = req.session.user.cart_id;
@@ -290,6 +290,8 @@ async function getProductsById(req, res) {
     const id = parseInt(req.params.id);
     const result = await product.getProductsById(id);
     res.render("detailProduct.ejs", {
+
+      categoryId: result[0].category_id,
       products: result,
       userName: userName, // Sử dụng dữ liệu người dùng từ session
       userStatus: userStatus,

@@ -3,7 +3,7 @@ import pool from "../../utils/database.js";
 
 async function addItem(req, productId, quantity, size, cardId) {  
   try {
-    //console.log(req.session.user);
+    //console.log('addItem:', req.session.user);
     const request = pool.request();
     request.input("productId", productId);
     request.input("size", size);

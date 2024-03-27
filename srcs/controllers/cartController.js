@@ -17,16 +17,16 @@ var cartId = 0;
 async function addItem(req, res) {
   try {
     if (req.session.user) {
-        userName = req.session.user.username;
-        userId = req.session.user.user_id;
-        cartId = req.session.user.cart_id;
-        userStatus = "Đăng xuất";
-      } else {
-        userName = "";
-        userStatus = "Đăng nhập";
-        userId = "0";
-        cartId = "0";
-      }
+      userName = req.session.user.username;
+      userId = req.session.user.user_id;
+      cartId = req.session.user.cart_id;
+      userStatus = "Đăng xuất";
+    } else {
+      userName = "";
+      userStatus = "Đăng nhập";
+      userId = "0";
+      cartId = "0";
+    }
     //console.log(userId);
 
     const infoOfOrder = req.body;
@@ -35,7 +35,7 @@ async function addItem(req, res) {
     const quantity = parseInt(infoOfOrder.quantity);
 
     const check = await item.addItem(req, productId, quantity, size);
-    console.log(check);
+    //console.log(check);
 
     if (check) {
       res.redirect("/cart");
@@ -50,18 +50,18 @@ async function getCart(req, res) {
   try {
     //console.log("Get getCart:", req.session.user);
     if (req.session.user) {
-        userName = req.session.user.username;
-        userId = req.session.user.user_id;
-        cartId = req.session.user.cart_id;
-        userStatus = "Đăng xuất";
-      } else {
-        userName = "";
-        userStatus = "Đăng nhập";
-        userId = "0";
-        cartId = "0";
-      }
+      userName = req.session.user.username;
+      userId = req.session.user.user_id;
+      cartId = req.session.user.cart_id;
+      userStatus = "Đăng xuất";
+    } else {
+      userName = "";
+      userStatus = "Đăng nhập";
+      userId = "0";
+      cartId = "0";
+    }
 
-    console.log("USER ID:", userId);
+    //console.log("USER ID:", userId);
 
     const cartData = await cart.getCartData(userId);
 
@@ -81,16 +81,16 @@ async function getCheckout(req, res) {
   try {
     //console.log("Get checkout:", req.body);
     if (req.session.user) {
-        userName = req.session.user.username;
-        userId = req.session.user.user_id;
-        cartId = req.session.user.cart_id;
-        userStatus = "Đăng xuất";
-      } else {
-        userName = "";
-        userStatus = "Đăng nhập";
-        userId = "0";
-        cartId = "0";
-      }
+      userName = req.session.user.username;
+      userId = req.session.user.user_id;
+      cartId = req.session.user.cart_id;
+      userStatus = "Đăng xuất";
+    } else {
+      userName = "";
+      userStatus = "Đăng nhập";
+      userId = "0";
+      cartId = "0";
+    }
 
     const cartData = await cart.getCartData(userId);
     const userData = await user.getUserById(userId);
@@ -112,16 +112,16 @@ async function getCheckout(req, res) {
 async function finishCheckout(req, res) {
   try {
     if (req.session.user) {
-        userName = req.session.user.username;
-        userId = req.session.user.user_id;
-        cartId = req.session.user.cart_id;
-        userStatus = "Đăng xuất";
-      } else {
-        userName = "";
-        userStatus = "Đăng nhập";
-        userId = "0";
-        cartId = "0";
-      }
+      userName = req.session.user.username;
+      userId = req.session.user.user_id;
+      cartId = req.session.user.cart_id;
+      userStatus = "Đăng xuất";
+    } else {
+      userName = "";
+      userStatus = "Đăng nhập";
+      userId = "0";
+      cartId = "0";
+    }
 
     const data = req.body;
     let date = new Date().toJSON().slice(0, 10);
@@ -138,8 +138,13 @@ async function finishCheckout(req, res) {
     if (updateStatement && addOrderStatement) {
       const updateStatusCart = await cart.updateStatusCart(userId, cartId);
       const addCartStatement = await cart.addCart(userId);
+      const updateStatementUser = await user.updateUserCart(req, userId);
 
-      if (updateStatusCart && addCartStatement) {
+      if (updateStatusCart && addCartStatement && updateStatement) {
+        //console.log('New status:', updateStatementUser.cart_id);
+        req.session.user = updateStatementUser;
+
+        //console.log(req.session.user);
         res.render("finishCheckout", { userName, userId, userStatus, cartId });
       }
     }
