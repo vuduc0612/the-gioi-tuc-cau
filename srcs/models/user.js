@@ -18,12 +18,12 @@ async function registerUser(name, email, password) {
     request.input("username", name);
     request.input("email", email);
     request.input("password", password);
-    
+
     const result = await request.query(
       "INSERT INTO [user] (username, email, password) VALUES ( @username, @email, @password);" +
-        "\nDECLARE @newUserId INT;" +
-        "\nSET @newUserId = SCOPE_IDENTITY();" +
-        "\nINSERT INTO cart  VALUES ( @newUserId, 0.00, 0);"
+      "\nDECLARE @newUserId INT;" +
+      "\nSET @newUserId = SCOPE_IDENTITY();" +
+      "\nINSERT INTO cart  VALUES ( @newUserId, 0.00, 0);"
     );
     return result.rowsAffected[0] > 0;
   } catch (error) {
@@ -37,13 +37,13 @@ async function loginUser(email, password, req) {
     const request = pool.request();
     request.input("email", email);
     request.input("password", password);
-    
+
     const result = await request.query(
       "SELECT U.*, cart.cart_id, cart.total_price, cart.cart_status from" +
-        "\n(SELECT * FROM [user] WHERE email = @email AND password = @password) as u" +
-        "\nINNER JOIN cart ON U.user_id = cart.user_id WHERE cart.cart_status = 0;"
+      "\n(SELECT * FROM [user] WHERE email = @email AND password = @password) as u" +
+      "\nINNER JOIN cart ON U.user_id = cart.user_id WHERE cart.cart_status = 0;"
     );
-    
+
     if (result.recordset.length > 0) {
       let user = result.recordset[0];
       req.session.user_name = user.username;
@@ -61,7 +61,29 @@ async function loginUser(email, password, req) {
     throw error;
   }
 }
+async function updateUserCart(req, userId) {
+  try {
+    const request = pool.request();
+    request.input("userId", userId);
 
+    const result = await request.query(
+      `SELECT U.*, C.cart_id, C.total_price, C.cart_status FROM [user] as U
+        INNER JOIN cart as C ON U.user_id = C.user_id
+        WHERE U.user_id = @userId AND C.cart_status = 0;`
+    );
+
+    if (result.recordset.length > 0) {
+      let user = result.recordset[0];
+      //console.log('New User: ', user);
+      req.session.user = user;
+      return user;
+    }
+
+  } catch (error) {
+    console.error('Error in create new cart for current user', error);
+    throw error;
+  }
+}
 async function getUserById(id) {
   try {
     const request = pool.request();
@@ -98,5 +120,5 @@ async function updateUser(firstName, lastName, address, phoneNumber, userId) {
   }
 }
 
-const user = { registerUser, loginUser, getUserById, updateUser, getUserInfo };
+const user = { registerUser, loginUser, getUserById, updateUser, getUserInfo, updateUserCart };
 export { user };

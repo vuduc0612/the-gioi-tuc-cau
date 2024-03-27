@@ -304,46 +304,6 @@
     </div>
 
 
-    <div class="container mt-5 rounded p-2 my-5" style="background-color: #41BC3F;">
-        <div class="row align-items-center">
-            <div class="col-md-6">
-                <h2 class="text-white">BĂNG KEO</h2>
-            </div>
-            <div class="col-md-6 ">
-                <a href="/category/sanpham1" class="text-white text-decoration-none float-end" style="font-size: larger;">XEM THÊM</a>
-            </div>
-        </div>
-    </div>
-    <div class="container mt-2">
-        <div class="row row-cols-1 row-cols-md-4 ">
-            <% let count7=0; %>
-                <% for(let i=0; i < products.length; i++) { %>
-                    <% if(products[i].category_id===7 && count7 < 4) { %>
-                        <div class="col d-flex align-items-stretch">
-                            <a href="/product/<%= products[i].id %>" class="text-decoration-none">
-                                <div class="card h-100" style="position: relative; box-shadow: 0 0 10px rgba(0,0,0,0.3);">
-                                    <% if(products[i].url) { %>
-                                        <img src="<%= products[i].url %>" class="card-img-top" style="max-height: 300px;"
-                                            alt="<%= products[i].name %>">
-                                        <% } %>
-                                            <div class="card-body">
-                                                <h5 class="card-title">
-                                                    <%= products[i].name %>
-                                                </h5>
-                                                <p class="card-text" style="position: absolute; bottom : 0;"><strong>
-                                                        <%= products[i].price %> đ
-                                                    </strong></p>
-                                            </div>
-                                </div>
-                            </a>
-                        </div>
-                        <% count7++; %>
-                            <% } %>
-                                <% if(count7>= 4) break; %>
-                                    <% } %>
-        </div>
-    </div>
-
 <%- include('partials/footer') %>
 
     
