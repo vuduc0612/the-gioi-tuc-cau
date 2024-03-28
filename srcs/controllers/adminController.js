@@ -4,9 +4,9 @@ import express from "express";
 const app = express()
 
 async function getAllBills(req, res) {
+    let adminName = req.session.admin.username;
+    console.log(req.session.admin.username);
     try {
-        console.log(req.session.admin.username);
-        let adminName = req.session.admin.username;
         const result = await admin.getAllBills();
         // console.log(result);
         res.render('admin.ejs', {allBills: result, adminName: adminName});
@@ -17,6 +17,7 @@ async function getAllBills(req, res) {
 }
 
 async function getBillById(req, res) {
+    let adminName = req.session.admin.username;
     try {
         if (!req.query.id) {
             return res.redirect('/');
@@ -25,7 +26,7 @@ async function getBillById(req, res) {
         const billId = req.query.id;
         const result = await admin.getBillById(billId);
         // console.log(result);
-        res.render('adminBill.ejs', {billDatas: result});
+        res.render('adminBill.ejs', {billDatas: result, adminName: adminName});
     } catch (error) {
         res.status(500).send('Internal server error');
         throw error;
@@ -33,10 +34,11 @@ async function getBillById(req, res) {
 }
 
 async function getAllProducts(req, res) {
+    let adminName = req.session.admin.username;
     try {
         const result = await admin.getAllProducts();
         // console.log(result);
-        res.render('adminInventory.ejs', {datas: result});
+        res.render('adminInventory.ejs', {datas: result, adminName: adminName});
     } catch (error) {
         res.status(500).send('Internal server error');
         throw error;
@@ -44,6 +46,7 @@ async function getAllProducts(req, res) {
 }
 
 async function getProductById(req, res) {
+    let adminName = req.session.admin.username;
     try {
         if (!req.query.id) {
             return res.redirect('/');
@@ -54,7 +57,7 @@ async function getProductById(req, res) {
         const inventoryDatas = await admin.getInventoryDatasByProductId(productId);
         const result = await admin.getProductById(productId);
         // console.log(inventoryDatas);
-        res.render('adminProducts.ejs', {productDatas: result, categoryDatas: categoryDatas, inventoryDatasByProd: inventoryDatas});
+        res.render('adminProducts.ejs', {productDatas: result, categoryDatas: categoryDatas, inventoryDatasByProd: inventoryDatas, adminName: adminName});
     } catch (error) {
         res.status(500).send('Internal server error');
         throw error;
