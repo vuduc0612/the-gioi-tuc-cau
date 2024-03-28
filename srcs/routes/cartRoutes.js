@@ -7,6 +7,7 @@ router.post('/addItem', cartController.addItem);
 router.get('/cart', cartController.getCart);
 router.get('/checkout', cartController.getCheckout);
 router.post('/finishCheckout', cartController.finishCheckout);
+router.post('/updateCart', cartController.updateCart);
 router.get('/deleteCartItem', cartController.delteItem);
 router.get('/errorCheckout', async (req, res) => {
     try {

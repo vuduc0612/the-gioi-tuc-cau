@@ -5,8 +5,9 @@ import configViewEngine from "./srcs/configs/configEjs.js";
 import bodyParser from "body-parser";
 import session from 'express-session';
 import { loginRoutes } from "./srcs/routes/loginRoutes.js";
-import { productRoutes } from "./srcs/routes/productRoutes.js";
+import {productRoutes} from "./srcs/routes/productRoutes.js";
 import { cartRoutes } from "./srcs/routes/cartRoutes.js";
+import { adminRoutes } from "./srcs/routes/adminRoutes.js";
 
 
 const port = 3000;
@@ -28,6 +29,7 @@ configViewEngine(app);
 app.use("/", loginRoutes);
 app.use("/", productRoutes);
 app.use("/", cartRoutes);
+app.use("/", adminRoutes);
 
 app.listen(port, () => {
     console.log(`Server is running on ${port}`);

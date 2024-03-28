@@ -109,6 +109,19 @@ async function getCheckout(req, res) {
   }
 }
 
+async function updateCart(req, res) {
+  try {
+    const formDatas = req.body;
+    Object.keys(formDatas).forEach(key => {
+      cart.updateCartItemQuantity(key, formDatas[key]);
+    });
+    res.redirect("/cart");
+  } catch (error) {
+    res.status(500).send("Internal Server Error");
+    throw error;
+  }
+}
+
 async function finishCheckout(req, res) {
   try {
     if (req.session.user) {
@@ -134,6 +147,8 @@ async function finishCheckout(req, res) {
       userId
     );
     const addOrderStatement = await order.addOrder(cartId, date, data.address);
+    cart.updateTotalPrice(cartId, req.body.totalPrice);
+    cart.updateInventoryQuantity(cartId);
 
     if (updateStatement && addOrderStatement) {
       const updateStatusCart = await cart.updateStatusCart(userId, cartId);
@@ -175,5 +190,6 @@ const cartController = {
   getCheckout,
   finishCheckout,
   delteItem,
+  updateCart,
 };
 export { cartController };

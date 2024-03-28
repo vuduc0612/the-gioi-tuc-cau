@@ -65,5 +65,54 @@ async function addCart(userId) {
     throw error;
   }
 }
-const cart = { getCartData, updateStatusCart, addCart };
+
+async function updateTotalPrice(cartId, totalPrice) {
+  try {
+    const request = pool.request();
+    await request.query(`
+      UPDATE [dbo].[cart]
+      SET [total_price] = ${totalPrice}
+      WHERE [cart_id] = ${cartId};
+    `);
+    return 1;
+  } catch (error) {
+    console.error("Error update total Price:", error);
+    throw error;
+  }
+}
+
+async function updateInventoryQuantity(cartId) {
+  try {
+    const request = pool.request();
+    await request.query(`
+      UPDATE inventory
+      SET quantity = inventory.quantity - item.quantity
+      FROM inventory
+      INNER JOIN item ON inventory.sku = item.sku
+      WHERE item.cart_id = ${cartId};    
+    `);
+    return 1;
+  } catch (error) {
+    console.error("Error update total Price:", error);
+    throw error;
+  }
+}
+
+async function updateCartItemQuantity(itemId, quantity) {
+  try {
+    const request = pool.request();
+    await request.query(`
+      UPDATE [item]
+      SET quantity = ${quantity}
+      FROM [item]
+      WHERE [item].[item_id] = ${itemId};    
+    `);
+    return 1;
+  } catch (error) {
+    console.error("Error update total Price:", error);
+    throw error;
+  }
+}
+
+const cart = { getCartData, updateStatusCart, addCart, updateTotalPrice, updateInventoryQuantity, updateCartItemQuantity };
 export { cart };

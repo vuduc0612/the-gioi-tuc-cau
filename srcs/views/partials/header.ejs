@@ -167,7 +167,7 @@
     <div class="offcanvas offcanvas-start" style="max-width: 15rem;" tabindex="-1" id="offcanvasNavbar"
         aria-labelledby="offcanvasNavbarLabel">
         <div class="offcanvas-header text-white" style="background-color: limegreen;">
-            <h5 class="offcanvas-title" style="font-size: large; font-weight: 600;" id="offcanvasNavbarLabel">Menu</h5>
+            <h5 class="offcanvas-title" style="font-size: large; font-weight: 600;" id="offcanvasNavbarLabel">MENU</h5>
             <button type="button" class="btn-close text-white" style="color: white;" data-bs-dismiss="offcanvas"
                 aria-label="Close"></button>
         </div>
@@ -177,18 +177,30 @@
                 <li class="nav-item">
                     <a class="nav-link active mx-3" style="font-size: large; font-weight: 600;" aria-current="page"
                         href="/">TRANG CHỦ</a>
+                        href="/">TRANG CHỦ</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link mx-3" style="font-size: large; font-weight: 600;" href="/category/soccer-shoes/nike/all">GIÀY NIKE</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link mx-3" style="font-size: large; font-weight: 600;" href="/category/soccer-shoes/mizuno/all">GIÀY MIZUNO</a>
+                    <a class="nav-link mx-3" style="font-size: large; font-weight: 600;" href="/category/soccer-shoes/mizuno/all">GIÀY MIZUNO</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link mx-3" style="font-size: large; font-weight: 600;" href="/category/soccer-shoes/nike/all">GIÀY ADIDAS</a>
+                    <a class="nav-link mx-3" style="font-size: large; font-weight: 600;" href="/category/soccer-shoes/adidas/all">GIÀY ADIDAS</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link mx-3" style="font-size: large; font-weight: 600;" href="/category/soccer-shoes/others/all">PHỤ KIỆN</a>
+                    <div class="dropdown mx-3" style="font-size: large; font-weight: 600;">
+                        <button class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                          PHỤ KIỆN
+                        </button>
+                        <ul class="dropdown-menu">
+                          <li><a class="dropdown-item" href="/category/others/ball/all">BÓNG ĐÁ</a></li>
+                          <li><a class="dropdown-item" href="/category/others/glove/all">GĂNG TAY</a></li>
+                          <li><a class="dropdown-item" href="/category/others/sock/all">TẤT CHÂN</a></li>
+                          <li><a class="dropdown-item" href="/category/others/tape/all">BĂNG KEO</a></li>
+                        </ul>
+                    </div>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link mx-3" style="font-size: large; font-weight: 600;" href="#">HƯỚNG DẪN</a>
@@ -197,7 +209,29 @@
                     <a class="nav-link mx-3" style="font-size: large; font-weight: 600;" href="#">TIN TỨC</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link mx-3" style="font-size: large; font-weight: 600;" href="/login">TÀI KHOẢN</i></a>
+                    <div class="nav-link mx-3" style="font-size: large; font-weight: 600;">
+                        <% if(locals.userName) { %>
+                            <div class="dropdown">
+                                <button class="nav-link dropdown-toggle p-0" data-bs-toggle="dropdown">
+                                    <%= userName %>
+                                </button>
+                                <ul class="dropdown-menu">
+                                  <li><% if (userStatus==='Đăng nhập' ) { %>
+                                            <a class="dropdown-item dang-nhap" id="dropdown-item" href="/login">
+                                                ĐĂNG NHẬP
+                                            </a>
+                                        <% } else { %>
+                                            <form action="/" method="POST">
+                                                <button type="submit" class="dropdown-item">ĐĂNG XUẤT</button>
+                                            </form>
+                                        <% } %>
+                                    </li>
+                                </ul>
+                            </div>
+                        <% } else { %>
+                            <a href="/login">ĐĂNG NHẬP</a>
+                        <% } %>
+                    </div>
                 </li>
             </ul>
         </div>
