@@ -264,6 +264,31 @@ async function updateProductInformation(newProductDatas) {
     }
 }
 
+async function loginAdmin(username, password, req) {
+    try {
+      const request = pool.request();
+      request.input("username", username);
+      request.input("password", password);
+  
+      const result = await request.query(`select * from admin where username = @username and password = @password`
+      );
+  
+      if (result.recordset.length > 0) {
+        let admin = result.recordset[0];
+        req.session.admin_name = admin.username;
+        req.session.admin_id = admin.admin_id;
+        req.session.status = "Đăng xuất";
+        return admin;
+      } else {
+        console.log("Khong co data");
+        return null;
+      }
+    } catch (error) {
+      console.error("Error logging in user:", error);
+      throw error;
+    }
+  }
 
-const admin = { getAllBills, getAllProducts, getProductById, getBillById, getCategoryDatas, getInventoryDatasByProductId, updateProductInformation};
+
+const admin = { loginAdmin, getAllBills, getAllProducts, getProductById, getBillById, getCategoryDatas, getInventoryDatasByProductId, updateProductInformation};
 export { admin };

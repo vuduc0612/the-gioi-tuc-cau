@@ -10,10 +10,6 @@ router.get('/login', (req, res) => {
     res.render('login.ejs');
 });
 
-router.get('/admin', (req, res) => {
-    res.render('adminLogin.ejs');
-});
-
 router.post('/register', loginController.register);
 
 router.post('/login', loginController.login);

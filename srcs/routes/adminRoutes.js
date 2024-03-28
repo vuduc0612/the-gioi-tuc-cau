@@ -3,6 +3,10 @@ import express from 'express';
 
 const router = express.Router();
 
+router.get('/admin', (req, res) => {
+    res.render('adminLogin.ejs');
+});
+router.post('/adminLogin', adminController.loginAdmin);
 router.get("/myAdmin", adminController.getAllBills);
 router.get("/myInventory", adminController.getAllProducts);
 router.get("/myBill", adminController.getBillById);

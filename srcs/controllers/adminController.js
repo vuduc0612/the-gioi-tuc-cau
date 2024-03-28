@@ -5,9 +5,11 @@ const app = express()
 
 async function getAllBills(req, res) {
     try {
+        console.log(req.session.admin.username);
+        let adminName = req.session.admin.username;
         const result = await admin.getAllBills();
         // console.log(result);
-        res.render('admin.ejs', {allBills: result});
+        res.render('admin.ejs', {allBills: result, adminName: adminName});
     } catch (error) {
         res.status(500).send('Internal server error');
         throw error;
@@ -76,5 +78,24 @@ async function updateProductInformation (req, res) {
     }
 }
 
-const adminController = { getAllBills, getBillById, getAllProducts, getProductById, updateProductInformation };
+async function loginAdmin(req, res) {
+    const { username, password } = req.body;
+    //console.log(req.body);
+    try {
+      const adminData = await admin.loginAdmin(username, password, req); // Truyền req vào loginUser để truy cập session
+      if (adminData) {
+        req.session.admin = adminData;
+        res.redirect("/admin?successLog=true");
+      } else {
+        res.redirect("/admin?error=true");
+      }
+    } catch (error) {
+      console.error("Error logging in user:", error);
+      res.status(500).send("Internal server error");
+    }
+  }
+
+
+
+const adminController = {loginAdmin, getAllBills, getBillById, getAllProducts, getProductById, updateProductInformation };
 export { adminController};
