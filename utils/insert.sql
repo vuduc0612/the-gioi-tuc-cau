@@ -325,12 +325,13 @@ SELECT p.product_id,
 FROM [product] p
 CROSS JOIN (
     VALUES (38), (39), (40), (41), (42), (43), (44)
-) s(size)
-WHERE p.category_id <= 3;
+) s(size);
 
 -- CHen du lieu cho cac san pham phu kien (category>3) voi so luong 30 va khong co size
-INSERT INTO [inventory] (product_id, quantity)
-SELECT p.product_id, 
-       30 as quantity
-FROM [product] p
-WHERE p.category_id > 3;
+-- INSERT INTO [inventory] (product_id, quantity)
+-- SELECT p.product_id, 
+--        30 as quantity
+-- FROM [product] p
+-- WHERE p.category_id > 3;
+
+INSERT INTO [admin] VALUES ('webadmin', '123456');
