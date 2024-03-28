@@ -11,7 +11,7 @@ router.get('/login', (req, res) => {
 });
 
 router.get('/admin', (req, res) => {
-    res.render('admin.ejs');
+    res.render('adminLogin.ejs');
 });
 
 router.post('/register', loginController.register);
